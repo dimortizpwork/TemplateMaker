@@ -60,16 +60,28 @@
     </Compile>
     <Compile Include="Helpers\CustomProperty\IConvertable.cs" />
     <Compile Include="Helpers\CustomProperty\IProperty.cs" />
+    <Compile Include="Helpers\CustomProperty\IPropertyEditorForm.cs" />
     <Compile Include="Helpers\CustomProperty\PropertyCollection.cs" />
+    <Compile Include="Helpers\CustomProperty\PropertyEditor.cs" />
     <Compile Include="Helpers\CustomProperty\PropetryDescriptor.cs" />
     <Compile Include="Helpers\CustomProperty\PropertyConverter.cs" />
+    <Compile Include="Helpers\SmartString\ISmartStringDictonary.cs" />
+    <Compile Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.Designer.cs">
+      <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\TemplatePropertyItem.cs" />
     <Compile Include="Models\Types\TableInfo.cs" />
-    <Compile Include="Models\Types\VariantString.cs" />
+    <Compile Include="Helpers\SmartString\SmartString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.resx">
+      <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

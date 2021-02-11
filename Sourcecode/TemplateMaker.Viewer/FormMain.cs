@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using TemplateMaker.Service.Models;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
+using TemplateMaker.Viewer.Helpers.SmartString;
 using TemplateMaker.Viewer.Models;
 using TemplateMaker.Viewer.Models.Types;
 
@@ -45,6 +46,21 @@ namespace TemplateMaker.Viewer
                     Required = property.Required,
                     DefaultValue = property.DefaultValue
                 });
+
+
+            var xxx = new TemplatePropertyItem
+            {
+                Name = "ModelManual",
+                Type = ETemplatePropertyType.TableInfo
+            };
+            xxx.SetValue(new TableInfo
+            {
+                FullName = new SmartString("VAN_INVOICEREMINDERORDER"),
+                Name = new SmartString("INVOICEREMINDERORDER"),
+                Prefix = new SmartString("VAN"),
+            });
+            CurrentProperties.Add(xxx);
+
 
             propertyGrid.SelectedObject = CurrentProperties;
             propertyGrid.Refresh();

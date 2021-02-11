@@ -51,12 +51,14 @@ namespace TemplateMaker.Viewer
             // 
             // comboBoxTemplate
             // 
+            this.comboBoxTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTemplate.FormattingEnabled = true;
             this.comboBoxTemplate.Location = new System.Drawing.Point(30, 48);
             this.comboBoxTemplate.Margin = new System.Windows.Forms.Padding(6);
             this.comboBoxTemplate.Name = "comboBoxTemplate";
-            this.comboBoxTemplate.Size = new System.Drawing.Size(1514, 33);
+            this.comboBoxTemplate.Size = new System.Drawing.Size(1984, 33);
             this.comboBoxTemplate.TabIndex = 1;
             this.comboBoxTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBoxTemplate_SelectedIndexChanged);
             // 
@@ -72,11 +74,13 @@ namespace TemplateMaker.Viewer
             // 
             // richTextBoxDescription
             // 
+            this.richTextBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxDescription.Location = new System.Drawing.Point(30, 158);
             this.richTextBoxDescription.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
-            this.richTextBoxDescription.Size = new System.Drawing.Size(1524, 87);
+            this.richTextBoxDescription.Size = new System.Drawing.Size(1994, 87);
             this.richTextBoxDescription.TabIndex = 4;
             this.richTextBoxDescription.Text = "";
             // 
@@ -95,23 +99,26 @@ namespace TemplateMaker.Viewer
             this.propertyGrid.Location = new System.Drawing.Point(24, 304);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(6);
             this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(1056, 576);
+            this.propertyGrid.Size = new System.Drawing.Size(1056, 749);
             this.propertyGrid.TabIndex = 6;
             this.propertyGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGrid_PropertyValueChanged);
             // 
             // richTextBoxParametersJson
             // 
+            this.richTextBoxParametersJson.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxParametersJson.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxParametersJson.Location = new System.Drawing.Point(1109, 352);
             this.richTextBoxParametersJson.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBoxParametersJson.Name = "richTextBoxParametersJson";
-            this.richTextBoxParametersJson.Size = new System.Drawing.Size(439, 528);
+            this.richTextBoxParametersJson.Size = new System.Drawing.Size(909, 701);
             this.richTextBoxParametersJson.TabIndex = 7;
             this.richTextBoxParametersJson.Text = "";
             // 
             // buttonExecute
             // 
-            this.buttonExecute.Location = new System.Drawing.Point(1432, 889);
+            this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExecute.Location = new System.Drawing.Point(1898, 1072);
             this.buttonExecute.Name = "buttonExecute";
             this.buttonExecute.Size = new System.Drawing.Size(116, 50);
             this.buttonExecute.TabIndex = 8;
@@ -123,7 +130,7 @@ namespace TemplateMaker.Viewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1578, 956);
+            this.ClientSize = new System.Drawing.Size(2048, 1147);
             this.Controls.Add(this.buttonExecute);
             this.Controls.Add(this.richTextBoxParametersJson);
             this.Controls.Add(this.propertyGrid);
@@ -134,7 +141,7 @@ namespace TemplateMaker.Viewer
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormMain";
-            this.Text = "FormMain";
+            this.Text = "Template Maker";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

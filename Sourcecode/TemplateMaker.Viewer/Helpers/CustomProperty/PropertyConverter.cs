@@ -8,9 +8,12 @@ namespace TemplateMaker.Viewer.Helpers.CustomProperty
     {
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(string) && value is T)
+            if (context != null)
             {
-                return (value as IConvertable).ToString();
+                if (destinationType == typeof(string) && value is T)
+                {
+                    return (value as IConvertable).DisplayValue();
+                }
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
