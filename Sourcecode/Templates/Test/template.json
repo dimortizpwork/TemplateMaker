@@ -1,0 +1,17 @@
+{
+    "Name": "Test",
+    "Description": "Template for tests",
+    "FilesPath": ".\\",
+    "Properties": [
+        {
+            "Name": "ProjectName",
+            "Required": true,
+            "DefaultValue": "ExampleProject"
+        },
+        {
+            "Name": "AppName",
+            "Required": true,
+            "DefaultValue": "App Lindo"
+        }
+    ]
+}

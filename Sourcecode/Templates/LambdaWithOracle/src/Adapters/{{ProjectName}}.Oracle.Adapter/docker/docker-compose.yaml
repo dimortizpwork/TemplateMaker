@@ -1,0 +1,31 @@
+version: '3'
+services:
+  oracle:
+    image: "container-registry-frankfurt.oracle.com/database/standard:12.1.0.2"
+    shm_size: '8gb'
+    privileged: true
+    environment:
+      - DB_SID=ORCL
+      - DB_PASSWD=supersecret
+      - DB_DOMAIN=localdomain
+      - DB_MEMORY=8G
+      - DB_PDB=default_pdb
+    ports:
+      - '1521:1521'
+  schema-baseline:
+    image: dhoer/flyway:4.2.0
+    command: "-url=jdbc:oracle:thin:@//172.17.0.1:1521/default_pdb.localdomain -user=system -password=supersecret baseline"
+    volumes:
+      - "../database/drivers:/flyway/drivers"
+      - "../database/system:/flyway/sql:ro"
+    depends_on:
+      - oracle 
+  schema-migrate:
+    image: dhoer/flyway:4.2.0
+    command: "-url=jdbc:oracle:thin:@//172.17.0.1:1521/default_pdb.localdomain -user=system -password=supersecret migrate"
+    volumes:
+      - "../database/drivers:/flyway/drivers"
+      - "../database/system:/flyway/sql:ro"
+    depends_on:
+      - oracle 
+    restart: on-failure

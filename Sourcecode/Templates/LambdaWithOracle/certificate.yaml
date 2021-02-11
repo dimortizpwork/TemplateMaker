@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFront certificate for the pin terminal payment lambda"
+Metadata:
+  AlertIdentifier: "{{RepositoryName}}"
+  Tags:
+    CostCenter: "finance"
+Parameters:
+  AppGroup:
+    Type: "String"
+    Default: "{{RepositoryName}}"
+    Description: "The name of the AppGroup"
+    AllowedPattern: "^[a-z0-9\\-]{1,32}$"
+  Environment:
+    Type: "String"
+    AllowedValues:
+      - "testing"
+      - "acceptance"
+      - "production"
+    Default: "testing"
+    ConstraintDescription: "Must be one of the values from the list."
+    Description: "Environment in which resources are deployed."
+  Region:
+    Description: "Specify the region"
+    Type: "String"
+    Default: "eu-west-1"
+    AllowedValues:
+      - "eu-west-1"
+Resources:
+  CloudFrontCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+      DomainValidationOptions:
+        - DomainName: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+          ValidationDomain: !Sub "coolblue-${Environment}.eu"
+      ValidationMethod: "DNS"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+        - Key: "AppGroup"
+          Value: !Ref "AppGroup"
+        - Key: "AppRole"
+          Value: "certificate"
+        - Key: "Environment"
+          Value: !Ref "Environment"

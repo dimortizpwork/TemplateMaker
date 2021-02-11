@@ -1,0 +1,22 @@
+[
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "production"
+  },
+  {
+    "ParameterKey": "OracleConnectionString",
+    "ParameterValue": "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={OracleHostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={OracleUserName};Password = {OraclePassword}"
+  },
+  {
+    "ParameterKey": "OracleHostName",
+    "ParameterValue": "production-oracle-vanessa-main.c6ehpnaid4e3.eu-west-1.rds.amazonaws.com"
+  },
+  {
+    "ParameterKey": "OracleUserName",
+    "ParameterValue": "AQICAHja4UwE1LSU3jDLKCq9tUZ76qcXgwP5to5vqZNRcaCWAgEAY9G5g+89zePHyMerTZNkAAAAcDBuBgkqhkiG9w0BBwagYTBfAgEAMFoGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMVZxfM5AMADlF9WiIAgEQgC0OF1wgu3VNKzNCqe+reeN9qbiKhVsZ22Pq5x98GyAJwyyTSU7txGNs1W+Jn/0="
+  },
+  {
+    "ParameterKey": "OraclePassword",
+    "ParameterValue": "AQICAHja4UwE1LSU3jDLKCq9tUZ76qcXgwP5to5vqZNRcaCWAgGrtXWcB/Go4mXruE9/3PhTAAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMBRPjNgMBoTGFumVlAgEQgCsC0NPlK5D40xsi6T4jab8ymLvROHc2PSCyWfNcYvUZ5AsuAhb2WqAsseUg"
+  }
+]

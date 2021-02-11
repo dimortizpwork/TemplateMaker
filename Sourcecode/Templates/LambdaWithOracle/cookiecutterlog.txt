@@ -1,0 +1,20 @@
+C:\dev\Net\net-pin-terminal-payment (master -> origin)
+Î» sam init --location gh:coolblue-development/cookiecutter-dotnet-sam
+[+] Initializing project structure...
+You've downloaded C:\Users\wouter.vannifterick\.cookiecutters\cookiecutter-dotnet-sam before. Is it okay to delete and re-download it? [yes]:
+project_name [Name of the project]: PinterminalPayment
+project_slug [Pinterminalpayment]:
+project_short_description [A short description of the project]: pin terminal payment
+project_app_group [The AppGroup for the project]: pinterminalpayment
+Select use_kms:
+1 - YES
+2 - NO
+Choose from 1, 2 [1]: 1
+Select lambda_trigger_type:
+1 - SQS
+2 - API
+Choose from 1, 2 [1]: 1
+cost_center [Value of Cloudformation Cost Center]: FNC
+[*] Project initialization is now complete
+
+C:\dev\Net\net-pin-terminal-payment (master -> origin)
