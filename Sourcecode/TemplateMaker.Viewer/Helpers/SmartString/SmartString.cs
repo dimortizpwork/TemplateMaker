@@ -25,6 +25,11 @@ namespace TemplateMaker.Viewer.Helpers.SmartString
             Default = value;
         }
 
+        public static implicit operator SmartString(string value)
+        {
+            return new SmartString(value);
+        }
+
         private void SetValue(string value)
         {
             Value = value;

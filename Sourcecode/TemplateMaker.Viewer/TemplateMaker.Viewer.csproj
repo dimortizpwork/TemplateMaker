@@ -111,9 +111,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TemplateMaker\TemplateMaker.Service.csproj">
+    <ProjectReference Include="..\TemplateMaker\TemplateMaker.csproj">
       <Project>{fc764442-5dcf-4946-9c48-348585321455}</Project>
-      <Name>TemplateMaker.Service</Name>
+      <Name>TemplateMaker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

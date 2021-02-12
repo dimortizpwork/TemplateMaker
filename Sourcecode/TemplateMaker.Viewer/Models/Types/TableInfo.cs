@@ -16,14 +16,14 @@ namespace TemplateMaker.Viewer.Models.Types
     [Editor(typeof(PropertyEditor<FormTableInfoPropertyEditor>), typeof(UITypeEditor))]
     internal class TableInfo
     {
-        public SmartString Name { get; set; } = new SmartString();
-        public SmartString Prefix { get; set; } = new SmartString();
-        public SmartString FullName { get; set; } = new SmartString();
+        public SmartString Name { get; set; }
+        public SmartString Prefix { get; set; }
+        public SmartString FullName { get; set; }
         public IEnumerable<ColumnInfo> Columns { get; set; }
     }
 
     internal class ColumnInfo
     {
-        public SmartString Name { get; set; } = new SmartString();
+        public SmartString Name { get; set; }
     }
 }

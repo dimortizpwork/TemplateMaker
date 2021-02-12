@@ -31,7 +31,6 @@ namespace TemplateMaker.Viewer
         {
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxTemplate = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
@@ -53,7 +52,6 @@ namespace TemplateMaker.Viewer
             // 
             this.comboBoxTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTemplate.FormattingEnabled = true;
             this.comboBoxTemplate.Location = new System.Drawing.Point(30, 48);
             this.comboBoxTemplate.Margin = new System.Windows.Forms.Padding(6);
@@ -62,22 +60,12 @@ namespace TemplateMaker.Viewer
             this.comboBoxTemplate.TabIndex = 1;
             this.comboBoxTemplate.SelectedIndexChanged += new System.EventHandler(this.comboBoxTemplate_SelectedIndexChanged);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 273);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Properties:";
-            // 
             // richTextBoxDescription
             // 
             this.richTextBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBoxDescription.Location = new System.Drawing.Point(30, 158);
+            this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxDescription.Location = new System.Drawing.Point(30, 132);
             this.richTextBoxDescription.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
             this.richTextBoxDescription.Size = new System.Drawing.Size(1994, 87);
@@ -87,7 +75,7 @@ namespace TemplateMaker.Viewer
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 127);
+            this.label3.Location = new System.Drawing.Point(25, 101);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 25);
@@ -96,7 +84,7 @@ namespace TemplateMaker.Viewer
             // 
             // propertyGrid
             // 
-            this.propertyGrid.Location = new System.Drawing.Point(24, 304);
+            this.propertyGrid.Location = new System.Drawing.Point(29, 240);
             this.propertyGrid.Margin = new System.Windows.Forms.Padding(6);
             this.propertyGrid.Name = "propertyGrid";
             this.propertyGrid.Size = new System.Drawing.Size(1056, 749);
@@ -107,18 +95,18 @@ namespace TemplateMaker.Viewer
             // 
             this.richTextBoxParametersJson.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxParametersJson.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBoxParametersJson.Location = new System.Drawing.Point(1109, 352);
+            this.richTextBoxParametersJson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxParametersJson.Location = new System.Drawing.Point(1115, 240);
             this.richTextBoxParametersJson.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBoxParametersJson.Name = "richTextBoxParametersJson";
-            this.richTextBoxParametersJson.Size = new System.Drawing.Size(909, 701);
+            this.richTextBoxParametersJson.Size = new System.Drawing.Size(909, 749);
             this.richTextBoxParametersJson.TabIndex = 7;
             this.richTextBoxParametersJson.Text = "";
             // 
             // buttonExecute
             // 
             this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExecute.Location = new System.Drawing.Point(1898, 1072);
+            this.buttonExecute.Location = new System.Drawing.Point(1908, 1008);
             this.buttonExecute.Name = "buttonExecute";
             this.buttonExecute.Size = new System.Drawing.Size(116, 50);
             this.buttonExecute.TabIndex = 8;
@@ -130,13 +118,13 @@ namespace TemplateMaker.Viewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2048, 1147);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(2048, 1092);
             this.Controls.Add(this.buttonExecute);
             this.Controls.Add(this.richTextBoxParametersJson);
             this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.richTextBoxDescription);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxTemplate);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -152,7 +140,6 @@ namespace TemplateMaker.Viewer
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxTemplate;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBoxDescription;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PropertyGrid propertyGrid;

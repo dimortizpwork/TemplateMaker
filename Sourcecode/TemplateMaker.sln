@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateMaker.Console", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMaker.Viewer", "TemplateMaker.Viewer\TemplateMaker.Viewer.csproj", "{989E7A65-5717-441D-ABF4-4FC8370DD322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMaker.Service", "TemplateMaker\TemplateMaker.Service.csproj", "{FC764442-5DCF-4946-9C48-348585321455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateMaker", "TemplateMaker\TemplateMaker.csproj", "{FC764442-5DCF-4946-9C48-348585321455}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{ABD012A7-1456-4EE9-AC6A-777477D86085}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

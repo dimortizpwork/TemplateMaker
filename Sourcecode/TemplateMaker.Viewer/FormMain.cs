@@ -55,9 +55,9 @@ namespace TemplateMaker.Viewer
             };
             xxx.SetValue(new TableInfo
             {
-                FullName = new SmartString("VAN_INVOICEREMINDERORDER"),
-                Name = new SmartString("INVOICEREMINDERORDER"),
-                Prefix = new SmartString("VAN"),
+                FullName = "VAN_INVOICEREMINDERORDER",
+                Name = "INVOICEREMINDERORDER",
+                Prefix = "VAN",
             });
             CurrentProperties.Add(xxx);
 
