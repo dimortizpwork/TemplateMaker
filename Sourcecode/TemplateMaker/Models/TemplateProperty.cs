@@ -1,4 +1,4 @@
-﻿namespace TemplateMaker.Service.Models
+﻿namespace TemplateProcessor.Models
 {
     public enum ETemplatePropertyType
     {

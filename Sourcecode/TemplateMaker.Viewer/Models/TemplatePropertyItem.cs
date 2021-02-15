@@ -1,7 +1,7 @@
 ﻿using System;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
-using TemplateMaker.Viewer.Models.Types;
-using TemplateMaker.Service.Models;
+using TemplateMaker.Viewer.Types;
+using TemplateProcessor.Models;
 
 namespace TemplateMaker.Viewer.Models
 {
@@ -36,7 +36,7 @@ namespace TemplateMaker.Viewer.Models
                 case ETemplatePropertyType.String:
                     return typeof(string);
                 case ETemplatePropertyType.TableInfo:
-                    return typeof(TableInfo);
+                    return typeof(TableInfoType);
                 default:
                     return typeof(string);
             }

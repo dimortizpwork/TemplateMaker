@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Windows.Forms;
-using TemplateMaker.Service.Models;
+using TemplateProcessor.Models;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
-using TemplateMaker.Viewer.Helpers.SmartString;
 using TemplateMaker.Viewer.Models;
-using TemplateMaker.Viewer.Models.Types;
+using TemplateMaker.Viewer.Types;
+using TemplateProcessor;
+using TemplateMaker.Viewer.Helpers.SmartString;
+using TemplateMaker.Viewer.Views;
 
 namespace TemplateMaker.Viewer
 {
@@ -53,11 +55,18 @@ namespace TemplateMaker.Viewer
                 Name = "ModelManual",
                 Type = ETemplatePropertyType.TableInfo
             };
-            xxx.SetValue(new TableInfo
+            xxx.SetValue(new TableInfoType
             {
                 FullName = "VAN_INVOICEREMINDERORDER",
                 Name = "INVOICEREMINDERORDER",
                 Prefix = "VAN",
+                Columns = new List<ColumnInfoType>()
+                {
+                    new ColumnInfoType()
+                    {
+                        Name = "TEST_COLUMN"
+                    }
+                }
             });
             CurrentProperties.Add(xxx);
 
@@ -70,7 +79,26 @@ namespace TemplateMaker.Viewer
 
         private void ShowTemplateParameters()
         {
-            richTextBoxParametersJson.Text = JsonConvert.SerializeObject(GetTemplateParameters(), Formatting.Indented);
+            try
+            {
+                richTextBoxParametersJson.Text = JsonConvert.SerializeObject(GetTemplateParameters(), Formatting.Indented);
+            }
+            catch(MissingDictonaryEntryException ex)
+            {
+                ThreatInvalidDictionaryEntryException(ex);
+            }
+            catch(Exception ex)
+            {
+                if (ex.InnerException is MissingDictonaryEntryException)
+                    ThreatInvalidDictionaryEntryException(ex.InnerException as MissingDictonaryEntryException);
+            }
+        }
+
+        private void ThreatInvalidDictionaryEntryException(MissingDictonaryEntryException ex)
+        {
+            string word = ex.Word;
+            FormDictionaryEntryEditor formDictionaryEntryEditor = new FormDictionaryEntryEditor();
+            formDictionaryEntryEditor.ShowDialog();
         }
 
         private dynamic GetTemplateParameters()
@@ -103,7 +131,7 @@ namespace TemplateMaker.Viewer
             if (Directory.Exists(outputPath))
                 Directory.Delete(outputPath, true);
 
-            TemplateProcessor processor = new TemplateProcessor(CurrentTemplate);
+            TemplateProcessor.TemplateProcessor processor = new TemplateProcessor.TemplateProcessor(CurrentTemplate);
             processor.OnProcessFile += (string filePath, byte[] fileContents) =>
             {
                 var outputFilePath = Path.Combine(outputPath, filePath);

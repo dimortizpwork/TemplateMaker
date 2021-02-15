@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Repositories\MySql.Repository\Repository.MySql.csproj" />
+    <ProjectReference Include="..\Repositories\Oracle.Repository\Repository.Oracle.csproj" />
+  </ItemGroup>
+
+</Project>

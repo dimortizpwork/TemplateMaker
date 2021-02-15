@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using TemplateMaker.Service.Models;
+using TemplateProcessor.Models;
 
-namespace TemplateMaker
+namespace TemplateProcessor
 {
     public class TemplateManager
     {

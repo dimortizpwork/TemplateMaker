@@ -1,9 +1,9 @@
 ﻿using HandlebarsDotNet;
 using System.IO;
 using System.Text;
-using TemplateMaker.Service.Models;
+using TemplateProcessor.Models;
 
-namespace TemplateMaker
+namespace TemplateProcessor
 {
     public delegate void TemplateProcessorOnProcessFileHandler(string filePath, byte[] fileContents);
     public class TemplateProcessor

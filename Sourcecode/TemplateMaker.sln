@@ -7,9 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateMaker.Console", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMaker.Viewer", "TemplateMaker.Viewer\TemplateMaker.Viewer.csproj", "{989E7A65-5717-441D-ABF4-4FC8370DD322}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateMaker", "TemplateMaker\TemplateMaker.csproj", "{FC764442-5DCF-4946-9C48-348585321455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateProcessor", "TemplateMaker\TemplateProcessor.csproj", "{FC764442-5DCF-4946-9C48-348585321455}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{ABD012A7-1456-4EE9-AC6A-777477D86085}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{882CB889-5101-45F9-B456-5DB109906372}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Oracle", "Repositories\Oracle.Repository\Repository.Oracle.csproj", "{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.MySql", "Repositories\MySql.Repository\Repository.MySql.csproj", "{74993678-52FE-4A96-8FDC-9C04472B6AAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C74494AD-5BC8-4796-9DA9-8D30A019CD72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaProcessor", "SchemaProcessor\SchemaProcessor.csproj", "{9F0FF404-E883-4545-A55B-3A871813A1BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +37,27 @@ Global
 		{FC764442-5DCF-4946-9C48-348585321455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC764442-5DCF-4946-9C48-348585321455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC764442-5DCF-4946-9C48-348585321455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74993678-52FE-4A96-8FDC-9C04472B6AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74993678-52FE-4A96-8FDC-9C04472B6AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74993678-52FE-4A96-8FDC-9C04472B6AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74993678-52FE-4A96-8FDC-9C04472B6AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F0FF404-E883-4545-A55B-3A871813A1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F0FF404-E883-4545-A55B-3A871813A1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F0FF404-E883-4545-A55B-3A871813A1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F0FF404-E883-4545-A55B-3A871813A1BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC764442-5DCF-4946-9C48-348585321455} = {C74494AD-5BC8-4796-9DA9-8D30A019CD72}
+		{C8F41D83-FA64-4ECB-BEF2-50E2C1D48405} = {882CB889-5101-45F9-B456-5DB109906372}
+		{74993678-52FE-4A96-8FDC-9C04472B6AAA} = {882CB889-5101-45F9-B456-5DB109906372}
+		{9F0FF404-E883-4545-A55B-3A871813A1BF} = {C74494AD-5BC8-4796-9DA9-8D30A019CD72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F15AAFF4-ABB2-4CF2-8AD0-C54DE906512B}

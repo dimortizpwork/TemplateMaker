@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,39 +10,38 @@ namespace TemplateMaker.Viewer.Helpers.SmartString
 {
     internal static class SmartStringDictonary
     {
+        private static string WordsFileName = "words.json";
+
         public static List<string> Words = new List<string>();
+
+        private static void AddWord(string word, bool allowMultipleUpperCase = false)
+        {
+            if (!char.IsUpper(word[0]))
+                throw new Exception($"Word {word} is out of pattern: does not start with upper case letter");
+            
+            if (!allowMultipleUpperCase && word.Where(x => char.IsUpper(x)).Count() > 1)
+                throw new Exception($"Word {word} is out of pattern: it contains more than one upper case letter");
+
+            if (Words.Where(x => x.Equals(word)).Count() == 0)
+                Words.Add(word);
+        }
 
         public static void LoadWords()
         {
-            Words.Add("Van");
-            Words.Add("Order");
-            Words.Add("Id");
-            Words.Add("Invoice");
-            Words.Add("Reminder");
-            Words.Add("Cache");
-            Words.Add("Cpr");
-            Words.Add("Cpc");
-            Words.Add("Line");
-            Words.Add("Item");
-            Words.Add("Product");
-            Words.Add("Evaluation");
-            Words.Add("Solution");
-            Words.Add("Quotation");
-            Words.Add("Price");
-            Words.Add("Date");
-            Words.Add("Time");
-            Words.Add("Value");
-            Words.Add("Supplier");
-            Words.Add("Shipment");
-            Words.Add("Return");
-            Words.Add("Customer");
-            Words.Add("User");
-            Words.OrderBy(x => x);
+            List<Word> words = JsonConvert.DeserializeObject<List<Word>>(File.ReadAllText(WordsFileName));
+            foreach (Word word in words)
+                AddWord(word.Value, word.AllowMultipleUpperCase);
+        }
+
+        public static void SaveWords()
+        {
+            File.WriteAllText(WordsFileName, JsonConvert.SerializeObject(Words, Formatting.Indented));
         }
         
         public static List<string> GetWords(string input)
         {
-            //Treat the string
+            string originalInput = input;
+            //Threat the string
             input = input.Replace(" ", "");
             input = input.Replace("_", "");
             input = input.Replace("-", "");
@@ -62,7 +63,7 @@ namespace TemplateMaker.Viewer.Helpers.SmartString
             }
 
             if (foundWords.Count == 0 || string.Join("", foundWords.ToArray()).ToLower() != input.ToLower())
-                throw new Exception($"Some workds was not found for string {input}");
+                throw new MissingDictonaryEntryException($"Some words was not found for string `{originalInput}`", originalInput);
 
             return foundWords;
         }

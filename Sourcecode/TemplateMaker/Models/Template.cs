@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TemplateMaker.Service.Models
+namespace TemplateProcessor.Models
 {
     public class Template
     {

@@ -33,11 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Handlebars, Version=2.0.4.0, Culture=neutral, PublicKeyToken=22225d0bf33cd661, processorArchitecture=MSIL">
       <HintPath>..\packages\Handlebars.Net.2.0.4\lib\net46\Handlebars.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.10.1\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,22 +74,35 @@
     <Compile Include="Helpers\CustomProperty\PropertyEditor.cs" />
     <Compile Include="Helpers\CustomProperty\PropetryDescriptor.cs" />
     <Compile Include="Helpers\CustomProperty\PropertyConverter.cs" />
+    <Compile Include="Helpers\SchemaProvider\SchemaProvider.cs" />
     <Compile Include="Helpers\SmartString\ISmartStringDictonary.cs" />
-    <Compile Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.cs">
+    <Compile Include="Helpers\SmartString\Exceptions\MissingDictonaryEntryException.cs" />
+    <Compile Include="Helpers\SmartString\Word.cs" />
+    <Compile Include="Types\ColumnInfoType.cs" />
+    <Compile Include="Views\FormDictionaryEntryEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.Designer.cs">
+    <Compile Include="Views\FormDictionaryEntryEditor.Designer.cs">
+      <DependentUpon>FormDictionaryEntryEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PropertyEditors\FormTableInfoPropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PropertyEditors\FormTableInfoPropertyEditor.Designer.cs">
       <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\TemplatePropertyItem.cs" />
-    <Compile Include="Models\Types\TableInfo.cs" />
+    <Compile Include="Types\TableInfoType.cs" />
     <Compile Include="Helpers\SmartString\SmartString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\PropertyEditors\FormTableInfoPropertyEditor.resx">
+    <EmbeddedResource Include="Views\FormDictionaryEntryEditor.resx">
+      <DependentUpon>FormDictionaryEntryEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PropertyEditors\FormTableInfoPropertyEditor.resx">
       <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -103,6 +125,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="words.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -111,10 +136,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TemplateMaker\TemplateMaker.csproj">
+    <ProjectReference Include="..\SchemaProcessor\SchemaProcessor.csproj">
+      <Project>{9f0ff404-e883-4545-a55b-3a871813a1bf}</Project>
+      <Name>SchemaProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TemplateMaker\TemplateProcessor.csproj">
       <Project>{fc764442-5dcf-4946-9c48-348585321455}</Project>
-      <Name>TemplateMaker</Name>
+      <Name>TemplateProcessor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

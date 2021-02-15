@@ -58,5 +58,10 @@ namespace TemplateMaker.Viewer.Helpers.SmartString
         {
             return Value.ToLower();
         }
+
+        public override string ToString()
+        {
+            return Default;
+        }
     }
 }
