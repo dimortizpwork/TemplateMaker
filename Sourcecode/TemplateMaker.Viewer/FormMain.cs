@@ -96,9 +96,10 @@ namespace TemplateMaker.Viewer
 
         private void ThreatInvalidDictionaryEntryException(MissingDictonaryEntryException ex)
         {
-            string word = ex.Word;
-            FormDictionaryEntryEditor formDictionaryEntryEditor = new FormDictionaryEntryEditor();
+            FormDictionaryEntryEditor formDictionaryEntryEditor = new FormDictionaryEntryEditor(ex.Word);
             formDictionaryEntryEditor.ShowDialog();
+            if (formDictionaryEntryEditor.Continue)
+                ShowTemplateParameters();
         }
 
         private dynamic GetTemplateParameters()

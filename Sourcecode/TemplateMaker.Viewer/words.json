@@ -1,47 +1,398 @@
 [
-  { "Value": "Visit" },
-  { "Value": "Timeslot" },
-  { "Value": "Sales" },
-  { "Value": "Channel" },
-  { "Value": "Message" },
+  {
+    "Value": "Visit",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Timeslot",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Sales",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Channel",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Message",
+    "AllowMultipleUpperCase": false
+  },
   {
     "Value": "IPV6",
     "AllowMultipleUpperCase": true
   },
-  { "Value": "Address" },
-  { "Value": "Stock" },
-  { "Value": "Cluster" },
-  { "Value": "Shopping" },
-  { "Value": "Cart" },
-  { "Value": "Cost" },
-  { "Value": "Delivery" },
-  { "Value": "Promise" },
-  { "Value": "Valid" },
-  { "Value": "Vat" },
-  { "Value": "Number" },
-  { "Value": "Last" },
-  { "Value": "Modification" },
-  { "Value": "Van" },
-  { "Value": "Order" },
-  { "Value": "Id" },
-  { "Value": "Invoice" },
-  { "Value": "Reminder" },
-  { "Value": "Cache" },
-  { "Value": "Cpr" },
-  { "Value": "Cpc" },
-  { "Value": "Line" },
-  { "Value": "Item" },
-  { "Value": "Product" },
-  { "Value": "Evaluation" },
-  { "Value": "Solution" },
-  { "Value": "Quotation" },
-  { "Value": "Price" },
-  { "Value": "Date" },
-  { "Value": "Time" },
-  { "Value": "Value" },
-  { "Value": "Supplier" },
-  { "Value": "Shipment" },
-  { "Value": "Return" },
-  { "Value": "Customer" },
-  { "Value": "User" }
+  {
+    "Value": "Address",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Stock",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cluster",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Shopping",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cart",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cost",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Delivery",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Promise",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Valid",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Vat",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Number",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Last",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Modification",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Van",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Order",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Id",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Invoice",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Reminder",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cache",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cpr",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Cpc",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Line",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Item",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Product",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Evaluation",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Solution",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Quotation",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Price",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Date",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Time",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Value",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Supplier",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Shipment",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Return",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Customer",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "User",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Test",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Column",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "IP",
+    "AllowMultipleUpperCase": true
+  },
+  {
+    "Value": "Address",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Shop",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Outlet",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Id",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Payment",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Method",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Id",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Currency",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Discount",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Vat",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Free",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Deleted",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Ship",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Date",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Pickup",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Date",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Expire",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Date",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Allow",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Packing",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Custom",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Reference",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Vat",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Free",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Reason",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Id",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Ready",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Stock",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Location",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Idx",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Priority",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Prepare",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Originating",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Communicated",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Delivery",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Assist",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "User",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Carrier",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Claim",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "From",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Referrer",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Allocation",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "End",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Hash",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Drop",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Off",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Location",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Group",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Forced",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Closed",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Community",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Discount",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Grp",
+    "AllowMultipleUpperCase": false
+  },
+  {
+    "Value": "Language",
+    "AllowMultipleUpperCase": false
+  }
 ]
