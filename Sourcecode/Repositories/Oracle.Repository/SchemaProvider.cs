@@ -8,11 +8,6 @@ namespace Repository.Oracle
     {
         private string ConnectionString = @"Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST=testing-oracle-vanessa-main.chj0idpp42cr.eu-west-1.rds.amazonaws.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id=DEVVANESSA;Password=mordor";
 
-        public override string ToString()
-        {
-            return "Oracle Schema Provider";
-        }
-
         private OracleConnection GetConnection()
         {
             OracleConnection connection = new OracleConnection(ConnectionString);
@@ -34,7 +29,7 @@ namespace Repository.Oracle
         {
             using (var context = GetConnection())
             {
-                return context.Query<T>(@"SELECT column_name Name FROM all_tab_columns WHERE table_name = :tableName", new
+                return context.Query<T>(@"SELECT column_name Name, data_type Type FROM all_tab_columns WHERE table_name = :tableName", new
                 {
                     tableName = tableName
                 });

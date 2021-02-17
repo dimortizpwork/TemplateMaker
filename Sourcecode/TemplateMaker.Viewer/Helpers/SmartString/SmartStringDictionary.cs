@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TemplateMaker.Viewer.Helpers.SmartString
 {
-    internal static class SmartStringDictonary
+    internal static class SmartStringDictionary
     {
         private static string WordsFileName = "words.json";
 

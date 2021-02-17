@@ -36,7 +36,7 @@ namespace TemplateMaker.Viewer.Views
             InputToWord(textBoxWord3, checkBoxAllowUpperCase3);
             InputToWord(textBoxWord4, checkBoxAllowUpperCase4);
             InputToWord(textBoxWord5, checkBoxAllowUpperCase5);
-            SmartStringDictonary.AddWords(Words, saveToFile: true);
+            SmartStringDictionary.AddWords(Words, saveToFile: true);
         }
     }
 }

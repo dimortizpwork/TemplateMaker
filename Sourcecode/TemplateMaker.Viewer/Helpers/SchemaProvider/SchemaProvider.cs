@@ -1,10 +1,6 @@
 ﻿using SchemaProcessor.SchemaProviders;
 using SchemaProcessor.Schemas;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TemplateMaker.Viewer.Types;
 
 namespace TemplateMaker.Viewer.Helpers.SchemaProvider
@@ -20,7 +16,8 @@ namespace TemplateMaker.Viewer.Helpers.SchemaProvider
             {
                 columns.Add(new ColumnInfoType
                 {
-                    Name = columnSchema.Name
+                    Name = columnSchema.Name,
+                    Type = new SmartType.SmartType(columnSchema.Type, schemaProvider.GetTypeLanguage())
                 });
             }
 

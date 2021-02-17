@@ -1,7 +1,7 @@
-﻿using SchemaProcessor.Schemas;
+﻿using SchemaProcessor.Enums;
+using SchemaProcessor.Schemas;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchemaProcessor.SchemaProviders
 {
@@ -15,6 +15,11 @@ namespace SchemaProcessor.SchemaProviders
         public TableSchema GetTableSchema(string entityName)
         {
             throw new NotImplementedException();
+        }
+
+        public ETypeLanguage GetTypeLanguage()
+        {
+            return ETypeLanguage.MySql;
         }
 
         public override string ToString()

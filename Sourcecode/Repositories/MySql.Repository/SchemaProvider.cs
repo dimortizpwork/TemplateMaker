@@ -8,11 +8,6 @@ namespace Repository.MySql
     {
         private string ConnectionString = @"";
 
-        public override string ToString()
-        {
-            return "MySql Schema Provider";
-        }
-
         public T GetTableInfo<T>(string tableName)
         {
             throw new Exception();

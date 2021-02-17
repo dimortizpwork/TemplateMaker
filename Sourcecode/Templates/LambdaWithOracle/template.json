@@ -29,7 +29,7 @@
             "DefaultValue": "finance"
         },
         {
-            "Name": "Model",
+            "Name": "TableSchema",
             "Type": "TableInfo",
             "Required": true
         }

@@ -1,0 +1,8 @@
+<Project>
+    <PropertyGroup>
+        <TieredCompilation>true</TieredCompilation>
+        <LangVersion>latest</LangVersion>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    </PropertyGroup>
+</Project>

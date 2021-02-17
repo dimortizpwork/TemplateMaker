@@ -37,16 +37,16 @@ namespace TemplateMaker.Viewer.Helpers.SmartString
 
         private string GetCamelCase()
         {
-            return SmartStringDictonary.GetCamelCase(Value);
+            return SmartStringDictionary.GetCamelCase(Value);
         }
 
         private string GetSnakeCase()
         {
-            return SmartStringDictonary.GetSnakeCase(Value);
+            return SmartStringDictionary.GetSnakeCase(Value);
         }
         private string GetPascalCase()
         {
-            return SmartStringDictonary.GetPascalCase(Value);
+            return SmartStringDictionary.GetPascalCase(Value);
         }
 
         private string GetUpperCase()

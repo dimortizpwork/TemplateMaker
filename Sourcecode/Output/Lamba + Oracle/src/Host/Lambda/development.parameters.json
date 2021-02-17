@@ -1,0 +1,13 @@
+{
+  "Environment": "testing",
+  "OracleConnectionString": "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={OracleHostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={OracleUserName};Password = {OraclePassword}",
+  "OracleHostName": "testing-oracle-vanessa-main.chj0idpp42cr.eu-west-1.rds.amazonaws.com",
+  "OracleUserName": "AQICAHgGQfBtehmNJn+A3B4fFV0649UIkJHjw9bG0srvQx4rRAFCH3jDKYnRVz7Wm79I32/HAAAAaDBmBgkqhkiG9w0BBwagWTBXAgEAMFIGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMB7jt41y7m4o1IG3xAgEQgCWecsuv22hSRkmzKWvCTj665E/ts7Mai797CGweCUpzpVZfZOIo",
+  "OraclePassword": "AQICAHgGQfBtehmNJn+A3B4fFV0649UIkJHjw9bG0srvQx4rRAHbVnnY3YrTxQB9lRPoD99rAAAAZDBiBgkqhkiG9w0BBwagVTBTAgEAME4GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMIMHRWbX8ySHl5EDkAgEQgCGR5/hyt2bjJKiLnfoHQLH41PV/B0WDf8xUNWGyt4S2LqQ=",
+  "OracleResilience": {
+    "RetryCount": 3,
+    "RetryDelayMilliseconds": 100,
+    "CircuitBreakerAllowedAttempts": 5,
+    "CircuitBreakerDurationMilliseconds": 5000
+  }
+}

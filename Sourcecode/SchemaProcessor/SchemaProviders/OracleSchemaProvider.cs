@@ -1,7 +1,6 @@
-﻿using SchemaProcessor.Schemas;
-using System;
+﻿using SchemaProcessor.Enums;
+using SchemaProcessor.Schemas;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchemaProcessor.SchemaProviders
 {
@@ -21,6 +20,11 @@ namespace SchemaProcessor.SchemaProviders
         public TableSchema GetTableSchema(string entityName)
         {
             return SchemaProvider.GetTableInfo<TableSchema>(entityName);
+        }
+
+        public ETypeLanguage GetTypeLanguage()
+        {
+            return ETypeLanguage.Oracle;
         }
 
         public override string ToString()

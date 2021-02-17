@@ -1,0 +1,89 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6E294F9-AF83-4C32-8318-32284EF38608}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C0B3DCC6-773D-469F-A8DA-F2C79756C11F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cloudformation", "cloudformation", "{B6913322-4149-4D32-9A9C-62BF6E4CFA6E}"
+	ProjectSection(SolutionItems) = preProject
+		cloudformation\acceptance.parameters.json = cloudformation\acceptance.parameters.json
+		cloudformation.yaml = cloudformation.yaml
+		cloudformation\development.parameters.json = cloudformation\development.parameters.json
+		cloudformation\parameters.json = cloudformation\parameters.json
+		cloudformation\production.parameters.json = cloudformation\production.parameters.json
+		cloudformation\testing.parameters.json = cloudformation\testing.parameters.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43F99F6D-046F-4AF5-9AC5-962AC845A77C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		Directory.Build.props = Directory.Build.props
+		Sample message.json = Sample message.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.Host.Lambda", "src\Host\Lambda{{ProjectName}}.Host.Lambda.csproj", "{250DC7DB-C306-41BF-B301-7F774E070DE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.Core", "src\Core{{ProjectName}}.Core.csproj", "{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.Host.Lambda.Tests", "test{{ProjectName}}.Host.Lambda.Tests{{ProjectName}}.Host.Lambda.Tests.csproj", "{92116F85-5C5C-4344-9F2C-77091FCD763C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{F096B952-E5DF-4918-8531-E4E6C322F239}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.SecretManagement.Adapter", "src\Adapters{{ProjectName}}.SecretManagement.Adapter{{ProjectName}}.SecretManagement.Adapter.csproj", "{429A7291-1EB0-4077-B719-4BC407BD0322}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.Core.Tests", "test{{ProjectName}}.Core.Tests{{ProjectName}}.Core.Tests.csproj", "{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleService.Oracle.Adapter", "src\Adapters{{ProjectName}}.Oracle.Adapter{{ProjectName}}.Oracle.Adapter.csproj", "{6467F3CC-03DA-40B8-9F0E-F68100093778}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{250DC7DB-C306-41BF-B301-7F774E070DE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250DC7DB-C306-41BF-B301-7F774E070DE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250DC7DB-C306-41BF-B301-7F774E070DE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250DC7DB-C306-41BF-B301-7F774E070DE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92116F85-5C5C-4344-9F2C-77091FCD763C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92116F85-5C5C-4344-9F2C-77091FCD763C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92116F85-5C5C-4344-9F2C-77091FCD763C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92116F85-5C5C-4344-9F2C-77091FCD763C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429A7291-1EB0-4077-B719-4BC407BD0322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429A7291-1EB0-4077-B719-4BC407BD0322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429A7291-1EB0-4077-B719-4BC407BD0322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429A7291-1EB0-4077-B719-4BC407BD0322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6467F3CC-03DA-40B8-9F0E-F68100093778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6467F3CC-03DA-40B8-9F0E-F68100093778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6467F3CC-03DA-40B8-9F0E-F68100093778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6467F3CC-03DA-40B8-9F0E-F68100093778}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{250DC7DB-C306-41BF-B301-7F774E070DE8} = {C6E294F9-AF83-4C32-8318-32284EF38608}
+		{B038F2BE-9F7A-4AF5-A1DF-C8B2BE2BB0C0} = {C6E294F9-AF83-4C32-8318-32284EF38608}
+		{92116F85-5C5C-4344-9F2C-77091FCD763C} = {C0B3DCC6-773D-469F-A8DA-F2C79756C11F}
+		{F096B952-E5DF-4918-8531-E4E6C322F239} = {C6E294F9-AF83-4C32-8318-32284EF38608}
+		{429A7291-1EB0-4077-B719-4BC407BD0322} = {F096B952-E5DF-4918-8531-E4E6C322F239}
+		{3171D1C2-D0EB-4D34-BBF3-81585F2BA3C6} = {C0B3DCC6-773D-469F-A8DA-F2C79756C11F}
+		{6467F3CC-03DA-40B8-9F0E-F68100093778} = {F096B952-E5DF-4918-8531-E4E6C322F239}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09A46EEC-815C-4B6C-9617-D29A4509B903}
+	EndGlobalSection
+EndGlobal

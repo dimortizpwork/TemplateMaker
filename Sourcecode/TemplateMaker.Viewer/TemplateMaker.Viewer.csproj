@@ -75,9 +75,12 @@
     <Compile Include="Helpers\CustomProperty\PropetryDescriptor.cs" />
     <Compile Include="Helpers\CustomProperty\PropertyConverter.cs" />
     <Compile Include="Helpers\SchemaProvider\SchemaProvider.cs" />
-    <Compile Include="Helpers\SmartString\ISmartStringDictonary.cs" />
+    <Compile Include="Helpers\SmartString\SmartStringDictionary.cs" />
     <Compile Include="Helpers\SmartString\Exceptions\MissingDictonaryEntryException.cs" />
     <Compile Include="Helpers\SmartString\Word.cs" />
+    <Compile Include="Helpers\SmartType\SmartType.cs" />
+    <Compile Include="Helpers\SmartType\SmartTypeDictionary.cs" />
+    <Compile Include="Helpers\SmartType\SmartTypeTranslator.cs" />
     <Compile Include="Types\ColumnInfoType.cs" />
     <Compile Include="Views\FormDictionaryEntryEditor.cs">
       <SubType>Form</SubType>

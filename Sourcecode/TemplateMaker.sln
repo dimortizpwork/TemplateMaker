@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.MySql", "Reposit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C74494AD-5BC8-4796-9DA9-8D30A019CD72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaProcessor", "SchemaProcessor\SchemaProcessor.csproj", "{9F0FF404-E883-4545-A55B-3A871813A1BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchemaProcessor", "SchemaProcessor\SchemaProcessor.csproj", "{9F0FF404-E883-4545-A55B-3A871813A1BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

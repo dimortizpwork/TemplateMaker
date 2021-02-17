@@ -27,7 +27,7 @@ namespace TemplateMaker.Viewer
 
         private void LoadTemplates()
         {
-            TemplateManager.Load(@"C:\Users\alisson.resenderubim\source\repos\TemplateMaker\Templates");
+            TemplateManager.Load(@"C:\Dev\DotNet\#Mine\TemplateMaker\Sourcecode\Templates");
             foreach (Template template in TemplateManager.GetTemplates())
                 comboBoxTemplate.Items.Add(template);
             if(comboBoxTemplate.Items.Count > 0)
@@ -48,29 +48,6 @@ namespace TemplateMaker.Viewer
                     Required = property.Required,
                     DefaultValue = property.DefaultValue
                 });
-
-
-            var xxx = new TemplatePropertyItem
-            {
-                Name = "ModelManual",
-                Type = ETemplatePropertyType.TableInfo
-            };
-            xxx.SetValue(new TableInfoType
-            {
-                FullName = "VAN_INVOICEREMINDERORDER",
-                Name = "INVOICEREMINDERORDER",
-                Prefix = "VAN",
-                Columns = new List<ColumnInfoType>()
-                {
-                    new ColumnInfoType()
-                    {
-                        Name = "TEST_COLUMN"
-                    }
-                }
-            });
-            CurrentProperties.Add(xxx);
-
-
             propertyGrid.SelectedObject = CurrentProperties;
             propertyGrid.Refresh();
 
@@ -128,7 +105,7 @@ namespace TemplateMaker.Viewer
 
         private void buttonExecute_Click(object sender, EventArgs e)
         {
-            var outputPath = Path.Combine(@"C:\Users\alisson.resenderubim\source\repos\TemplateMaker\Output", CurrentTemplate.Name);
+            var outputPath = Path.Combine(@"C:\Dev\DotNet\#Mine\TemplateMaker\Sourcecode\Output", CurrentTemplate.Name);
             if (Directory.Exists(outputPath))
                 Directory.Delete(outputPath, true);
 

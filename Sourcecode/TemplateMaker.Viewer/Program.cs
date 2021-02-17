@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TemplateMaker.Viewer.Helpers;
 using TemplateMaker.Viewer.Helpers.SmartString;
+using TemplateMaker.Viewer.Helpers.SmartType;
 
 namespace TemplateMaker.Viewer
 {
@@ -18,7 +19,8 @@ namespace TemplateMaker.Viewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            SmartStringDictonary.LoadWords();
+            SmartStringDictionary.LoadWords();
+            SmartTypeDictionary.LoadTypes();
             Application.Run(new FormMain());
         }
     }
