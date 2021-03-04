@@ -14,7 +14,7 @@ namespace SchemaProcessor.SchemaProviders
 
         public IEnumerable<ColumnSchema> GetColumnsSchema(string entityName)
         {
-            return SchemaProvider.GetColumnsInfo<ColumnSchema>(entityName); ;
+            return SchemaProvider.GetColumnsInfo<ColumnSchema>(entityName);
         }
 
         public TableSchema GetTableSchema(string entityName)

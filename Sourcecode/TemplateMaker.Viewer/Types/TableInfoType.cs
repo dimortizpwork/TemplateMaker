@@ -5,17 +5,15 @@ using System.Drawing.Design;
 using System.Globalization;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
 using TemplateMaker.Viewer.Helpers.PropertyEditors;
-using TemplateMaker.Viewer.Helpers.SmartString;
+using TemplateProcessor.Helpers.SmartString;
 
 namespace TemplateMaker.Viewer.Types
 {
-
-    [Editor(typeof(PropertyEditor<FormTableInfoPropertyEditor>), typeof(UITypeEditor))]
     internal class TableInfoType
     {
-        public SmartString Name { get; set; } = string.Empty;
-        public SmartString Prefix { get; set; } = string.Empty;
-        public SmartString FullName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Prefix { get; set; } = string.Empty;
+        public string FullName { get; set; } = string.Empty;
         public IEnumerable<ColumnInfoType> Columns { get; set; }
     }
 }

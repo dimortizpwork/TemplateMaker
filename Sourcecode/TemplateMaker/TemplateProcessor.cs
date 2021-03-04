@@ -1,6 +1,8 @@
 ﻿using HandlebarsDotNet;
 using System.IO;
 using System.Text;
+using TemplateProcessor.Helpers.SmartString;
+using TemplateProcessor.Helpers.SmartType;
 using TemplateProcessor.Models;
 
 namespace TemplateProcessor
@@ -13,6 +15,15 @@ namespace TemplateProcessor
         public TemplateProcessor(Template template)
         {
             Template = template;
+            
+            SetupHandlebars();
+        }
+
+        private void SetupHandlebars()
+        {
+            Handlebars.Configuration.ThrowOnUnresolvedBindingExpression = true;
+            SmartStringHelperRegister.Register();
+            SmartTypeHelperRegister.Register();
         }
 
         public void Process(dynamic parameters)
@@ -36,7 +47,7 @@ namespace TemplateProcessor
             string processedFileName = templateFileName(parameters);
             processedFileName = processedFileName.Replace("//", "\\");
 
-            if (Template.SearchFileExtensions.IndexOf(Path.GetExtension(filePath)) > 0){
+            if (Template.SearchFileExtensions.IndexOf(Path.GetExtension(filePath)) >= 0){
                 string fileContents = File.ReadAllText(filePath);
                 //Process the file contents
                 HandlebarsTemplate<object, object> templateFileContents = Handlebars.Compile(fileContents);

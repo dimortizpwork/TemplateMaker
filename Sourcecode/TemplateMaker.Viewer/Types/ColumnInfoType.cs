@@ -1,11 +1,12 @@
-﻿using TemplateMaker.Viewer.Helpers.SmartString;
-using TemplateMaker.Viewer.Helpers.SmartType;
+﻿
+using TemplateProcessor.Helpers.SmartString;
+using TemplateProcessor.Helpers.SmartType;
 
 namespace TemplateMaker.Viewer.Types
 {
     internal class ColumnInfoType
     {
-        public SmartString Name { get; set; } = string.Empty;
-        public SmartType Type { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

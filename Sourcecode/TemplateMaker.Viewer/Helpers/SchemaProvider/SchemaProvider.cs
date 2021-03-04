@@ -2,6 +2,7 @@
 using SchemaProcessor.Schemas;
 using System.Collections.Generic;
 using TemplateMaker.Viewer.Types;
+using TemplateProcessor.Helpers.SmartType;
 
 namespace TemplateMaker.Viewer.Helpers.SchemaProvider
 {
@@ -17,7 +18,7 @@ namespace TemplateMaker.Viewer.Helpers.SchemaProvider
                 columns.Add(new ColumnInfoType
                 {
                     Name = columnSchema.Name,
-                    Type = new SmartType.SmartType(columnSchema.Type, schemaProvider.GetTypeLanguage())
+                    Type = columnSchema.Type
                 });
             }
 

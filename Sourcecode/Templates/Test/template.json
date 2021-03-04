@@ -1,17 +1,24 @@
 {
     "Name": "Test",
-    "Description": "Template for tests",
+    "Description": "Template used for tests",
     "FilesPath": ".\\",
+    "SearchDirectory": null,
+    "SearchFileExtensions": [".txt"],
     "Properties": [
         {
             "Name": "ProjectName",
             "Required": true,
-            "DefaultValue": "ExampleProject"
+            "DefaultValue": "OrderLine"
         },
         {
             "Name": "AppName",
             "Required": true,
-            "DefaultValue": "App Lindo"
+            "DefaultValue": "order-line"
+        },
+        {
+            "Name": "ColumnType",
+            "Required": true,
+            "DefaultValue": "VARCHAR2"
         }
     ]
 }

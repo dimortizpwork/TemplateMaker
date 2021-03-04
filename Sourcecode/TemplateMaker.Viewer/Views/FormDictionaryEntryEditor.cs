@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using TemplateMaker.Viewer.Helpers.SmartString;
+using TemplateProcessor.Helpers.SmartString;
+using TemplateProcessor.Helpers.SmartString.Models;
 
 namespace TemplateMaker.Viewer.Views
 {

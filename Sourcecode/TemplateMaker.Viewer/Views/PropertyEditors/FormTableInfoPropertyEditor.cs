@@ -37,9 +37,9 @@ namespace TemplateMaker.Viewer.Helpers.PropertyEditors
 
             if (Value == null)
                 Value = new TableInfoType();
-            textBoxFullName.Text = Value.FullName.Default;
-            textBoxName.Text = Value.Name.Default;
-            textBoxPrefix.Text = Value.Prefix.Default;
+            textBoxFullName.Text = Value.FullName;
+            textBoxName.Text = Value.Name;
+            textBoxPrefix.Text = Value.Prefix;
 
 
             var souce = new BindingSource();
