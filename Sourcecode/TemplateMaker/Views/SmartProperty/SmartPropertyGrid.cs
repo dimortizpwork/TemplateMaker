@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
-using TemplateMaker.Viewer.Views.PropertyEditors;
+using TemplateMaker.Viewer.Views.SmartProperty.Editor;
 
-namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
+namespace TemplateMaker.Viewer.Views.SmartProperty
 {
-    public delegate void SmartPropertyGridOnValueChangeHandler(IProperty property);
+    public delegate void SmartPropertyGridOnPropertyValueChangeHandler(IProperty property);
     public partial class SmartPropertyGrid : UserControl
     {
         private IList<IProperty> Properties;
-        public SmartPropertyGridOnValueChangeHandler OnValueChange;
+        public event SmartPropertyGridOnPropertyValueChangeHandler PropertyValueChanged;
 
         public SmartPropertyGrid()
         {
@@ -32,26 +33,27 @@ namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
             IProperty property = Properties[e.RowIndex];
             if (property.GetValueType() == typeof(string))
                 property.SetValue(dataGridView.Rows[e.RowIndex].Cells["ColumnPropertyValue"].Value);
-            OnValueChange?.Invoke(property);
+            PropertyValueChanged?.Invoke(property);
         }
 
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             IProperty property = Properties[e.RowIndex];
-            if (property.GetValueType() != typeof(string))
+            Type smartPropertyEditor = property.GetEditorType();
+            if (smartPropertyEditor != null)
             {
                 e.Cancel = true;
                 object value = dataGridView.Rows[e.RowIndex].Cells["ColumnPropertyValue"].Value;
-                /*FormPropertyEditor formPropertyEditor = new FormPropertyEditor();
-                formPropertyEditor.SetEditor(new TableInfoPropertyEditor());
+                FormSmartPropertyEditor formPropertyEditor = new FormSmartPropertyEditor();
+                formPropertyEditor.DefinePropertyEditor(smartPropertyEditor);
                 formPropertyEditor.SetValue(value);
                 if (formPropertyEditor.ShowDialog() == DialogResult.OK)
                 {
                     value = formPropertyEditor.GetValue();
                     dataGridView.Rows[e.RowIndex].Cells["ColumnPropertyValue"].Value = value;
                     property.SetValue(value);
-                    OnValueChange?.Invoke(property);
-                }*/
+                    PropertyValueChanged?.Invoke(property);
+                }
             }
         }
     }

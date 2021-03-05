@@ -82,12 +82,6 @@
     <Compile Include="Views\FormDictionaryEntryEditor.Designer.cs">
       <DependentUpon>FormDictionaryEntryEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PropertyEditors\FormTableInfoPropertyEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\PropertyEditors\FormTableInfoPropertyEditor.Designer.cs">
-      <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\TemplatePropertyItem.cs" />
     <Compile Include="Types\TableInfoType.cs" />
     <Compile Include="Program.cs" />
@@ -98,10 +92,17 @@
     <Compile Include="Views\PropertyEditors\TableInfoPropertyEditor.Designer.cs">
       <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SmartPropertyGrid\SmartPropertyGrid.cs">
+    <Compile Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.Designer.cs">
+      <DependentUpon>FormSmartPropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SmartProperty\Editor\ISmartPropertyEditor.cs" />
+    <Compile Include="Views\SmartProperty\SmartPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\SmartPropertyGrid\SmartPropertyGrid.Designer.cs">
+    <Compile Include="Views\SmartProperty\SmartPropertyGrid.Designer.cs">
       <DependentUpon>SmartPropertyGrid.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Views\FormMain.resx">
@@ -109,9 +110,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormDictionaryEntryEditor.resx">
       <DependentUpon>FormDictionaryEntryEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\PropertyEditors\FormTableInfoPropertyEditor.resx">
-      <DependentUpon>FormTableInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,7 +124,10 @@
     <EmbeddedResource Include="Views\PropertyEditors\TableInfoPropertyEditor.resx">
       <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SmartPropertyGrid\SmartPropertyGrid.resx">
+    <EmbeddedResource Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.resx">
+      <DependentUpon>FormSmartPropertyEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SmartProperty\SmartPropertyGrid.resx">
       <DependentUpon>SmartPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

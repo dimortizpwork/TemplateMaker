@@ -1,6 +1,7 @@
 ﻿using System;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
 using TemplateMaker.Viewer.Types;
+using TemplateMaker.Views.PropertyEditors;
 using TemplateProcessor.Models;
 
 namespace TemplateMaker.Viewer.Models
@@ -50,6 +51,19 @@ namespace TemplateMaker.Viewer.Models
                     return GetValue() as string;
                 case ETemplatePropertyType.TableInfo:
                     return GetValue() != null ? (GetValue() as TableInfoType).Name : null;
+                default:
+                    return null;
+            }
+        }
+
+        public Type GetEditorType()
+        {
+            switch (Type)
+            {
+                case ETemplatePropertyType.String:
+                    return null;
+                case ETemplatePropertyType.TableInfo:
+                    return typeof(TableInfoPropertyEditor);
                 default:
                     return null;
             }

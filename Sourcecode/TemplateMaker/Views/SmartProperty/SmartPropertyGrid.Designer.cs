@@ -1,5 +1,5 @@
 ﻿
-namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
+namespace TemplateMaker.Viewer.Views.SmartProperty
 {
     partial class SmartPropertyGrid
     {
@@ -50,7 +50,7 @@ namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowTemplate.Height = 17;
-            this.dataGridView.Size = new System.Drawing.Size(451, 308);
+            this.dataGridView.Size = new System.Drawing.Size(547, 159);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -71,11 +71,12 @@ namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
             // 
             // SmartPropertyGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.dataGridView);
+            this.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SmartPropertyGrid";
-            this.Size = new System.Drawing.Size(451, 308);
+            this.Size = new System.Drawing.Size(547, 159);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -16,7 +16,7 @@ namespace TemplateMaker.Viewer
     public partial class FormMain : Form
     {
         private readonly TemplateManager TemplateManager;
-        private PropertyCollection<TemplatePropertyItem> CurrentProperties;
+        private List<IProperty> CurrentProperties;
         private Template CurrentTemplate;
         public FormMain()
         {
@@ -38,7 +38,7 @@ namespace TemplateMaker.Viewer
             CurrentTemplate = template;
             richTextBoxDescription.Text = CurrentTemplate.Description;
 
-            CurrentProperties = new PropertyCollection<TemplatePropertyItem>();
+            /*CurrentProperties = new PropertyCollection<TemplatePropertyItem>();
             foreach (TemplateProperty property in CurrentTemplate.Properties)
                 CurrentProperties.Add(new TemplatePropertyItem
                 {
@@ -48,19 +48,19 @@ namespace TemplateMaker.Viewer
                     DefaultValue = property.DefaultValue
                 });
             propertyGrid.SelectedObject = CurrentProperties;
-            propertyGrid.Refresh();
+            propertyGrid.Refresh();*/
 
 
-            List<IProperty> properties = new List<IProperty>();
+            CurrentProperties = new List<IProperty>();
             foreach (TemplateProperty property in CurrentTemplate.Properties)
-                properties.Add(new TemplatePropertyItem
+                CurrentProperties.Add(new TemplatePropertyItem
                 {
                     Name = property.Name,
                     Type = property.Type,
                     Required = property.Required,
                     DefaultValue = property.DefaultValue
                 });
-            smartPropertyGrid.LoadProperties(properties);
+            smartPropertyGrid.LoadProperties(CurrentProperties);
 
             ShowTemplateParameters();
         }
@@ -93,7 +93,7 @@ namespace TemplateMaker.Viewer
         private dynamic GetTemplateParameters()
         {
             IDictionary<string, object> obj = new ExpandoObject();
-            foreach (TemplatePropertyItem property in CurrentProperties)
+            foreach (IProperty property in CurrentProperties)
                 obj.Add(property.GetName(), property.GetValue());
             return obj;
         }
@@ -107,11 +107,6 @@ namespace TemplateMaker.Viewer
         {
             if(comboBoxTemplate.SelectedItem != null)
                 LoadTemplate(comboBoxTemplate.SelectedItem as Template);
-        }
-
-        private void propertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
-        {
-            ShowTemplateParameters();
         }
 
         private void buttonExecute_Click(object sender, EventArgs e)
@@ -129,6 +124,11 @@ namespace TemplateMaker.Viewer
                 File.WriteAllBytes(outputFilePath, fileContents);
             };
             processor.Process(GetTemplateParameters());
+        }
+
+        private void smartPropertyGrid_PropertyValueChanged(IProperty property)
+        {
+            ShowTemplateParameters();
         }
     }
 }

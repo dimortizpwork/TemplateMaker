@@ -11,5 +11,6 @@ namespace TemplateMaker.Viewer.Helpers.CustomProperty
         object GetValue();
         void SetValue(object value);
         Type GetValueType();
+        Type GetEditorType();
     }
 }
