@@ -36,6 +36,7 @@ namespace TemplateMaker.Viewer
             this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.richTextBoxParametersJson = new System.Windows.Forms.RichTextBox();
             this.buttonExecute = new System.Windows.Forms.Button();
+            this.smartPropertyGrid = new TemplateMaker.Viewer.Views.SmartPropertyGrid.SmartPropertyGrid();
             this.SuspendLayout();
             // 
             // label1
@@ -115,12 +116,20 @@ namespace TemplateMaker.Viewer
             this.buttonExecute.UseVisualStyleBackColor = true;
             this.buttonExecute.Click += new System.EventHandler(this.buttonExecute_Click);
             // 
+            // smartPropertyGrid
+            // 
+            this.smartPropertyGrid.Location = new System.Drawing.Point(1111, 240);
+            this.smartPropertyGrid.Name = "smartPropertyGrid";
+            this.smartPropertyGrid.Size = new System.Drawing.Size(913, 469);
+            this.smartPropertyGrid.TabIndex = 9;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(2048, 1061);
+            this.Controls.Add(this.smartPropertyGrid);
             this.Controls.Add(this.buttonExecute);
             this.Controls.Add(this.richTextBoxParametersJson);
             this.Controls.Add(this.propertyGrid);
@@ -146,5 +155,6 @@ namespace TemplateMaker.Viewer
         private System.Windows.Forms.PropertyGrid propertyGrid;
         private System.Windows.Forms.RichTextBox richTextBoxParametersJson;
         private System.Windows.Forms.Button buttonExecute;
+        private Views.SmartPropertyGrid.SmartPropertyGrid smartPropertyGrid;
     }
 }

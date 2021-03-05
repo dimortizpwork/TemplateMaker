@@ -50,6 +50,18 @@ namespace TemplateMaker.Viewer
             propertyGrid.SelectedObject = CurrentProperties;
             propertyGrid.Refresh();
 
+
+            List<IProperty> properties = new List<IProperty>();
+            foreach (TemplateProperty property in CurrentTemplate.Properties)
+                properties.Add(new TemplatePropertyItem
+                {
+                    Name = property.Name,
+                    Type = property.Type,
+                    Required = property.Required,
+                    DefaultValue = property.DefaultValue
+                });
+            smartPropertyGrid.LoadProperties(properties);
+
             ShowTemplateParameters();
         }
 

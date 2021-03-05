@@ -10,7 +10,7 @@ using System.Windows.Forms.Design;
 
 namespace TemplateMaker.Viewer.Helpers.CustomProperty
 {
-    internal class PropertyEditor<T> : UITypeEditor where T: Form, IPropertyEditorForm, new()
+    /*internal class PropertyEditor<T> : UITypeEditor where T: Form, IPropertyEditorForm, new()
     {
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
@@ -32,5 +32,5 @@ namespace TemplateMaker.Viewer.Helpers.CustomProperty
             }
             return value;
         }
-    }
+    }*/
 }

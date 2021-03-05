@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TemplateMaker.Viewer.Views.SmartPropertyGrid
+namespace TemplateMaker.Viewer.Views.PropertyEditors
 {
-    public partial class SmartPropertyGrid : UserControl
+    public partial class TableInfoPropertyEditor : UserControl
     {
-        public SmartPropertyGrid()
+        public TableInfoPropertyEditor()
         {
             InitializeComponent();
         }

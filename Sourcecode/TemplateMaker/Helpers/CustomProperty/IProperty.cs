@@ -3,10 +3,11 @@ using System.ComponentModel;
 
 namespace TemplateMaker.Viewer.Helpers.CustomProperty
 {
-    internal interface IProperty
+    public interface IProperty
     {
         string GetName();
         string GetDescription();
+        string GetDisplayValue();
         object GetValue();
         void SetValue(object value);
         Type GetValueType();

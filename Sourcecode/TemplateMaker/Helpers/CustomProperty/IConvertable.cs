@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TemplateMaker.Viewer.Helpers.CustomProperty
 {
-    internal interface IConvertable
+    /*internal interface IConvertable
     {
         string DisplayValue();
-    }
+    }*/
 }

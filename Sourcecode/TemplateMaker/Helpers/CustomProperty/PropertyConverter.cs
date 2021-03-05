@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace TemplateMaker.Viewer.Helpers.CustomProperty
 {
-    internal class PropertyConverter<T> : ExpandableObjectConverter where T: IConvertable
+    /*internal class PropertyConverter<T> : ExpandableObjectConverter where T: IConvertable
     {
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
@@ -17,5 +17,5 @@ namespace TemplateMaker.Viewer.Helpers.CustomProperty
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
-    }
+    }*/
 }

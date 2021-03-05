@@ -38,7 +38,20 @@ namespace TemplateMaker.Viewer.Models
                 case ETemplatePropertyType.TableInfo:
                     return typeof(TableInfoType);
                 default:
-                    return typeof(string);
+                    return null;
+            }
+        }
+
+        public string GetDisplayValue()
+        {
+            switch (Type)
+            {
+                case ETemplatePropertyType.String:
+                    return GetValue() as string;
+                case ETemplatePropertyType.TableInfo:
+                    return GetValue() != null ? (GetValue() as TableInfoType).Name : null;
+                default:
+                    return null;
             }
         }
     }

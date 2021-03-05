@@ -92,6 +92,12 @@
     <Compile Include="Types\TableInfoType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\PropertyEditors\TableInfoPropertyEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\PropertyEditors\TableInfoPropertyEditor.Designer.cs">
+      <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SmartPropertyGrid\SmartPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +123,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\PropertyEditors\TableInfoPropertyEditor.resx">
+      <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SmartPropertyGrid\SmartPropertyGrid.resx">
       <DependentUpon>SmartPropertyGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,11 +150,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SchemaProcessor\SchemaProcessor.csproj">
+    <ProjectReference Include="..\Core\SchemaProcessor\SchemaProcessor.csproj">
       <Project>{9f0ff404-e883-4545-a55b-3a871813a1bf}</Project>
       <Name>SchemaProcessor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TemplateMaker\TemplateProcessor.csproj">
+    <ProjectReference Include="..\Core\TemplateProcessor\TemplateProcessor.csproj">
       <Project>{fc764442-5dcf-4946-9c48-348585321455}</Project>
       <Name>TemplateProcessor</Name>
     </ProjectReference>
