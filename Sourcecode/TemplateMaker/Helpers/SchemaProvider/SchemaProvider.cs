@@ -1,6 +1,7 @@
 ﻿using SchemaProcessor.SchemaProviders;
 using SchemaProcessor.Schemas;
 using System.Collections.Generic;
+using TemplateMaker.Viewer.Helpers.SchemaProvider.Exceptions;
 using TemplateMaker.Viewer.Types;
 using TemplateProcessor.Helpers.SmartType;
 
@@ -23,6 +24,9 @@ namespace TemplateMaker.Viewer.Helpers.SchemaProvider
             }
 
             TableSchema tableSchema = schemaProvider.GetTableSchema(tableName);
+            if (tableSchema == null)
+               throw new SchemaNotFoundException(tableName);
+
             TableInfoType tableInfo = new TableInfoType
             {
                 FullName = tableSchema.Name,

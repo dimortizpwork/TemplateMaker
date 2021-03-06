@@ -3,6 +3,7 @@ using SchemaProcessor.SchemaProviders;
 using System;
 using System.Windows.Forms;
 using TemplateMaker.Viewer.Helpers.SchemaProvider;
+using TemplateMaker.Viewer.Helpers.SchemaProvider.Exceptions;
 using TemplateMaker.Viewer.Types;
 using TemplateMaker.Viewer.Views.SmartProperty.Editor;
 
@@ -57,8 +58,15 @@ namespace TemplateMaker.Views.PropertyEditors
 
         private void buttonLoadTableInfo_Click(object sender, EventArgs e)
         {
-            Value = SchemaProvider.GetTableInfo(GetSelectedSchemaProvider(), textBoxEntityName.Text);
-            LoadValue();
+            try
+            {
+                Value = SchemaProvider.GetTableInfo(GetSelectedSchemaProvider(), textBoxEntityName.Text);
+                LoadValue();
+            }
+            catch(SchemaNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 
 namespace Repository.Oracle
@@ -19,9 +20,17 @@ namespace Repository.Oracle
         {
             using (var context = GetConnection())
             {
-                return context.QueryFirst<T>(@"SELECT table_name as Name FROM all_all_tables WHERE table_name = :tableName", new { 
-                    tableName = tableName 
-                });
+                try
+                {
+                    return context.QueryFirst<T>(@"SELECT table_name as Name FROM all_all_tables WHERE table_name = :tableName", new
+                    {
+                        tableName = tableName
+                    });
+                }
+                catch(Exception e)
+                {
+                    return default(T);
+                }
             }
         }
 

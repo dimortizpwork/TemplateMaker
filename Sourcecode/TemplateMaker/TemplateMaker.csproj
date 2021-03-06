@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\SchemaProvider\Exceptions\SchemaNotFoundException.cs" />
     <Compile Include="Views\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
