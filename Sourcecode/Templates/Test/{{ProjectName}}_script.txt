@@ -1,0 +1,7 @@
+Ola, bem vindo ao {{ProjectName}}
+
+Eu sou o {{AppName}}
+
+{{PascalCase ProjectName}}
+
+{{OracleToCSharp ColumnType}}

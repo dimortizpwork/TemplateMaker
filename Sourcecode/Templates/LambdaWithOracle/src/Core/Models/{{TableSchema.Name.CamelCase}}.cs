@@ -2,10 +2,10 @@ using System;
 
 namespace {{ProjectName}}.Core.Models
 {
-    public class {{TableSchema.Name.CamelCase}}
+    public class {{CamelCase TableSchema.Name}}
     {
         {{#each TableSchema.Columns}}
-            public {{Type.CSharp}} {{Name.CamelCase}} { get; set; }
+            public {{OracleToCSharp Type}} {{CamelCase Name}} { get; set; }
         {{/each}}
     }
 }
