@@ -32,6 +32,18 @@
             "Name": "TableSchema",
             "Type": "TableInfo",
             "Required": true
+        },
+        {
+            "Name": "ExampleCollectionNames",
+            "Type": "String",
+            "Required": true,
+            "IsCollection": true
+        },
+        {
+            "Name": "Models",
+            "Type": "TableInfo",
+            "Required": true,
+            "IsCollection": true
         }
     ]
 }

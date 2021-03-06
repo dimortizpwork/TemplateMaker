@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TemplateMaker.Viewer.Helpers.CustomProperty;
 
 namespace TemplateMaker.Viewer.Views.SmartProperty.Editor
 {
-    public partial class FormSmartPropertyEditor : Form
+    public partial class FormSmartPropertyEditor : Form, IFromSmartPropertyEditor
     {
         private UserControl Editor;
         public FormSmartPropertyEditor()
@@ -38,6 +39,5 @@ namespace TemplateMaker.Viewer.Views.SmartProperty.Editor
         {
             return (Editor as ISmartPropertyEditor).GetValue();
         }
-
     }
 }

@@ -92,13 +92,21 @@
     <Compile Include="Views\PropertyEditors\TableInfoPropertyEditor.Designer.cs">
       <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.cs">
+    <Compile Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyCollectionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.Designer.cs">
+    <Compile Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyCollectionEditor.Designer.cs">
+      <DependentUpon>FormSmartPropertyCollectionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyEditor.Designer.cs">
       <DependentUpon>FormSmartPropertyEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SmartProperty\Editor\Helper\SmartPropetyEditorFactory.cs" />
     <Compile Include="Views\SmartProperty\Editor\ISmartPropertyEditor.cs" />
+    <Compile Include="Views\SmartProperty\Editor\Forms\IFromSmartPropertyEditor.cs" />
     <Compile Include="Views\SmartProperty\SmartPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -124,7 +132,10 @@
     <EmbeddedResource Include="Views\PropertyEditors\TableInfoPropertyEditor.resx">
       <DependentUpon>TableInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SmartProperty\Editor\FormSmartPropertyEditor.resx">
+    <EmbeddedResource Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyCollectionEditor.resx">
+      <DependentUpon>FormSmartPropertyCollectionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SmartProperty\Editor\Forms\FormSmartPropertyEditor.resx">
       <DependentUpon>FormSmartPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SmartProperty\SmartPropertyGrid.resx">

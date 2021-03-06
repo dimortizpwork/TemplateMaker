@@ -58,7 +58,8 @@ namespace TemplateMaker.Viewer
                     Name = property.Name,
                     Type = property.Type,
                     Required = property.Required,
-                    DefaultValue = property.DefaultValue
+                    DefaultValue = property.DefaultValue,
+                    IsCollection = property.IsCollection
                 });
             smartPropertyGrid.LoadProperties(CurrentProperties);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
 using TemplateMaker.Viewer.Views.SmartProperty.Editor;
+using TemplateMaker.Viewer.Views.SmartProperty.Editor.Helper;
 
 namespace TemplateMaker.Viewer.Views.SmartProperty
 {
@@ -11,6 +12,7 @@ namespace TemplateMaker.Viewer.Views.SmartProperty
     {
         private IList<IProperty> Properties;
         public event SmartPropertyGridOnPropertyValueChangeHandler PropertyValueChanged;
+
 
         public SmartPropertyGrid()
         {
@@ -26,6 +28,21 @@ namespace TemplateMaker.Viewer.Views.SmartProperty
                 dataGridView.Rows[index].Cells["ColumnPropertyName"].Value = property.GetName();
                 dataGridView.Rows[index].Cells["ColumnPropertyValue"].Value = property.GetDisplayValue();
             }
+            SetPropertyInfo(null);        
+        }
+
+        private void SetPropertyInfo(IProperty property)
+        {
+            if (property != null)
+            {
+                labelType.Text = property.GetValueType().ToString();
+                labelDescription.Text = property.GetDescription();
+            }
+            else
+            {
+                labelType.Text = string.Empty;
+                labelDescription.Text = string.Empty;
+            }
         }
 
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -39,22 +56,20 @@ namespace TemplateMaker.Viewer.Views.SmartProperty
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             IProperty property = Properties[e.RowIndex];
-            Type smartPropertyEditor = property.GetEditorType();
-            if (smartPropertyEditor != null)
+
+            if (property.GetIsCollection() || property.GetEditorType() != null)
             {
                 e.Cancel = true;
-                object value = dataGridView.Rows[e.RowIndex].Cells["ColumnPropertyValue"].Value;
-                FormSmartPropertyEditor formPropertyEditor = new FormSmartPropertyEditor();
-                formPropertyEditor.DefinePropertyEditor(smartPropertyEditor);
-                formPropertyEditor.SetValue(value);
-                if (formPropertyEditor.ShowDialog() == DialogResult.OK)
-                {
-                    value = formPropertyEditor.GetValue();
-                    dataGridView.Rows[e.RowIndex].Cells["ColumnPropertyValue"].Value = value;
-                    property.SetValue(value);
-                    PropertyValueChanged?.Invoke(property);
-                }
+                object value = SmartPropetyEditorFactory.OpenEditor(property.GetEditorType(), property.GetValue(), property.GetIsCollection());
+                property.SetValue(value);
+                dataGridView.Rows[Properties.IndexOf(property)].Cells["ColumnPropertyValue"].Value = property.GetDisplayValue();
+                PropertyValueChanged?.Invoke(property);
             }
+        }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetPropertyInfo(e.RowIndex > -1 ? Properties[e.RowIndex] : null);
         }
     }
 }

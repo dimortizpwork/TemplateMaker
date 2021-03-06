@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TemplateMaker.Viewer.Helpers.CustomProperty;
 using TemplateMaker.Viewer.Types;
 using TemplateMaker.Views.PropertyEditors;
@@ -32,41 +34,55 @@ namespace TemplateMaker.Viewer.Models
 
         public Type GetValueType()
         {
-            switch (Type)
+            if (GetIsCollection())
             {
-                case ETemplatePropertyType.String:
-                    return typeof(string);
-                case ETemplatePropertyType.TableInfo:
-                    return typeof(TableInfoType);
-                default:
-                    return null;
+                if (Type == ETemplatePropertyType.String)
+                    return typeof(ICollection<string>);
+                else if (Type == ETemplatePropertyType.TableInfo)
+                    return typeof(ICollection<TableInfoType>);
             }
+            else
+            {
+                if (Type == ETemplatePropertyType.String)
+                    return typeof(string);
+                else if (Type == ETemplatePropertyType.TableInfo)
+                    return typeof(TableInfoType);
+            }
+            return null;
         }
 
         public string GetDisplayValue()
         {
-            switch (Type)
+            if (GetValue() != null)
             {
-                case ETemplatePropertyType.String:
-                    return GetValue() as string;
-                case ETemplatePropertyType.TableInfo:
-                    return GetValue() != null ? (GetValue() as TableInfoType).Name : null;
-                default:
-                    return null;
+                if (GetIsCollection())
+                { 
+                    if (Type == ETemplatePropertyType.String)
+                        return $"[Collection::String][{(GetValue() as ICollection<object>).Count()}]";
+                    else if (Type == ETemplatePropertyType.TableInfo)
+                        return $"[Collection::TableInfo][{(GetValue() as ICollection<object>).Count()}]";
+                }
+                else
+                {
+                    if (Type == ETemplatePropertyType.String)
+                        return GetValue() as string;
+                    else if (Type == ETemplatePropertyType.TableInfo)
+                        return $"[Object::TableInfo] {(GetValue() as TableInfoType).FullName}";
+                }
             }
+            return null;
         }
 
         public Type GetEditorType()
         {
-            switch (Type)
-            {
-                case ETemplatePropertyType.String:
-                    return null;
-                case ETemplatePropertyType.TableInfo:
-                    return typeof(TableInfoPropertyEditor);
-                default:
-                    return null;
-            }
+            if (Type == ETemplatePropertyType.TableInfo)
+                return typeof(TableInfoPropertyEditor);
+            return null;
+        }
+
+        public bool GetIsCollection()
+        {
+            return IsCollection;
         }
     }
 }
