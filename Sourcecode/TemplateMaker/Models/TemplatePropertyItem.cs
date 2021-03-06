@@ -40,6 +40,8 @@ namespace TemplateMaker.Viewer.Models
                     return typeof(ICollection<string>);
                 else if (Type == ETemplatePropertyType.TableInfo)
                     return typeof(ICollection<TableInfoType>);
+                else if (Type == ETemplatePropertyType.ApiInfo)
+                    return typeof(ICollection<ApiInfoType>);
             }
             else
             {
@@ -47,6 +49,8 @@ namespace TemplateMaker.Viewer.Models
                     return typeof(string);
                 else if (Type == ETemplatePropertyType.TableInfo)
                     return typeof(TableInfoType);
+                else if (Type == ETemplatePropertyType.ApiInfo)
+                    return typeof(ApiInfoType);
             }
             return null;
         }
@@ -61,6 +65,8 @@ namespace TemplateMaker.Viewer.Models
                         return $"[Collection::String][{(GetValue() as ICollection<object>).Count()}]";
                     else if (Type == ETemplatePropertyType.TableInfo)
                         return $"[Collection::TableInfo][{(GetValue() as ICollection<object>).Count()}]";
+                    else if (Type == ETemplatePropertyType.ApiInfo)
+                        return $"[Collection::ApiInfo][{(GetValue() as ICollection<object>).Count()}]";
                 }
                 else
                 {
@@ -68,6 +74,8 @@ namespace TemplateMaker.Viewer.Models
                         return GetValue() as string;
                     else if (Type == ETemplatePropertyType.TableInfo)
                         return $"[Object::TableInfo] {(GetValue() as TableInfoType).FullName}";
+                    else if (Type == ETemplatePropertyType.ApiInfo)
+                        return $"[Object::ApiInfo] {(GetValue() as ApiInfoType).Name}";
                 }
             }
             return null;
@@ -77,6 +85,8 @@ namespace TemplateMaker.Viewer.Models
         {
             if (Type == ETemplatePropertyType.TableInfo)
                 return typeof(TableInfoPropertyEditor);
+            if (Type == ETemplatePropertyType.ApiInfo)
+                return typeof(ApiInfoPropertyEditor);
             return null;
         }
 

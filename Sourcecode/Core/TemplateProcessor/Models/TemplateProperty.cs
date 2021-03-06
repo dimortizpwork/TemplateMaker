@@ -3,7 +3,8 @@
     public enum ETemplatePropertyType
     {
         String,
-        TableInfo
+        TableInfo,
+        ApiInfo
     }
 
     public class TemplateProperty

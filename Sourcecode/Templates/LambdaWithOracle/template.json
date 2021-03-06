@@ -34,6 +34,11 @@
             "Required": true
         },
         {
+            "Name": "ApiInfo",
+            "Type": "ApiInfo",
+            "Required": true
+        },
+        {
             "Name": "ExampleCollectionNames",
             "Type": "String",
             "Required": true,
