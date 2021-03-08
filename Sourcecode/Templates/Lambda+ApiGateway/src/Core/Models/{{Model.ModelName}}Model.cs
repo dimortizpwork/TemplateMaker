@@ -1,11 +1,11 @@
 using System;
 
-namespace SuperNiceProject.Models
+namespace {{SolutionName}}.Models
 {
-    public class NiceProjectModel
+    public class {{Model.ModelName}}Model
     {
-        public long NiceProjectId { get; set; }
-        public long NiceProjectStateId { get; set; }
+        public long {{Model.KeyField}} { get; set; }
+        public long {{Model.ModelName}}StateId { get; set; }
         public string UniqueReference { get; set; }
         public long ShopId { get; set; }
         public long OrderId { get; set; }

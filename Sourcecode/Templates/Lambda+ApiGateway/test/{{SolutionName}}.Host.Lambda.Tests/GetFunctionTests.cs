@@ -15,7 +15,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 {
     public class GetFunctionTests
     {
-        private readonly Mock<IGet{{ModelName}}> _useCase;
+        private readonly Mock<IGet{{Model.ModelName}}> _useCase;
         private readonly Function _function;
 
         const int INVITO_TO_PAYID = 999;
@@ -24,7 +24,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 
         public GetFunctionTests()
         {
-            _useCase = new Mock<IGet{{ModelName}}>();
+            _useCase = new Mock<IGet{{Model.ModelName}}>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -38,7 +38,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnNotFound()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{ModelName}}Id", INVITO_TO_PAYID.ToString() }
+                { "{{Model.KeyField}}", INVITO_TO_PAYID.ToString() }
             });
             var task = _function.FunctionHandler(request, null);
 

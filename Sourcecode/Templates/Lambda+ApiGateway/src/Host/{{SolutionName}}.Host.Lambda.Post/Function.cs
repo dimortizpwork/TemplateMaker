@@ -27,19 +27,19 @@ namespace {{SolutionName}}.Host.Lambda.Post
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(RequestModel requestParameters)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<ICreate{{ModelName}}>();
+            var _useCase = scope.GetInstance<ICreate{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                var {{ModelName}}id = _useCase.Create(requestParameters.ToModel());
+                var {{Model.KeyField}} = _useCase.Create(requestParameters.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.Created, body: new ResponseModel {
-                    {{ModelName}}Id = {{ModelName}}id
+                    {{Model.KeyField}} = {{Model.KeyField}}
                 });
             });
         }
 
         public override void RegisterContainer(Container container)
         {
-            container.Register<ICreate{{ModelName}}, Create{{ModelName}}>();
+            container.Register<ICreate{{Model.ModelName}}, Create{{Model.ModelName}}>();
         }
     }
 }

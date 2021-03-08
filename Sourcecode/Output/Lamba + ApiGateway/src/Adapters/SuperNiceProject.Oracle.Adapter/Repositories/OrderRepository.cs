@@ -9,7 +9,7 @@ using SuperNiceProject.Repositories;
 
 namespace SuperNiceProject.Oracle.Adapter.Repositories
 {
-    public class NiceProjectRepository : AbstractOracleRepository, INiceProjectRepository
+    public class OrderRepository : AbstractOracleRepository, IOrderRepository
     {
         private const string MonitoringGet = "MonitoringGet";
         private const string MonitoringPost = "MonitoringPost";
@@ -39,7 +39,7 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
                 VAN_PKG_INVITETOPAY.DELETE(:P_ID); 
               end;";
 
-        public NiceProjectRepository(ITimingDbConnectionFactory connectionFactory, OracleResiliencePolicy resiliencePolicy) : base(
+        public OrderRepository(ITimingDbConnectionFactory connectionFactory, OracleResiliencePolicy resiliencePolicy) : base(
            connectionFactory, resiliencePolicy)
         {
 
@@ -55,19 +55,19 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
             }, MonitoringDelete);
         }
 
-        public NiceProjectModel Get(long Id)
+        public OrderModel Get(long Id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("P_ID", Id);
 
             return ExecuteWithPolicy(() => {
                 Connection.Open();
-                var dto = Connection.QueryFirst<NiceProjectDto>("GetQuery", GetQuery, parameters);
+                var dto = Connection.QueryFirst<OrderDto>("GetQuery", GetQuery, parameters);
                 return dto.ToModel();
             }, MonitoringGet);
         }
 
-        public int Post(NiceProjectModel model)
+        public int Post(OrderModel model)
         {
             var parameters = new DynamicParameters();
             //parameters.Add("P_UNIQUEREFERENCE", model.UniqueReference);
@@ -79,7 +79,7 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
             }, MonitoringPost);
         }
 
-        public void Put(long Id, NiceProjectModel model)
+        public void Put(long Id, OrderModel model)
         {
             var parameters = new DynamicParameters();
             parameters.Add("P_ID", Id);

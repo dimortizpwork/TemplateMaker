@@ -1,7 +1,7 @@
 ﻿
-namespace TemplateMaker.Views.PropertyEditors
+namespace SmartProperty.Editors.Editor
 {
-    partial class ObjectPropertyEditor
+    partial class SmartPropertyObjectEditor
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,30 +29,32 @@ namespace TemplateMaker.Views.PropertyEditors
         /// </summary>
         private void InitializeComponent()
         {
-            this.smartPropertyGrid1 = new SmartProperty.SmartPropertyGrid();
+            this.smartPropertyGrid = new SmartProperty.SmartPropertyGrid();
             this.SuspendLayout();
             // 
-            // smartPropertyGrid1
+            // smartPropertyGrid
             // 
-            this.smartPropertyGrid1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.smartPropertyGrid1.Location = new System.Drawing.Point(3, 3);
-            this.smartPropertyGrid1.Name = "smartPropertyGrid1";
-            this.smartPropertyGrid1.Size = new System.Drawing.Size(747, 396);
-            this.smartPropertyGrid1.TabIndex = 0;
+            this.smartPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.smartPropertyGrid.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.smartPropertyGrid.Location = new System.Drawing.Point(0, 0);
+            this.smartPropertyGrid.Name = "smartPropertyGrid";
+            this.smartPropertyGrid.Size = new System.Drawing.Size(547, 301);
+            this.smartPropertyGrid.TabIndex = 0;
             // 
-            // ObjectPropertyEditor
+            // SmartPropertyObjectEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.smartPropertyGrid1);
-            this.Name = "ObjectPropertyEditor";
-            this.Size = new System.Drawing.Size(753, 402);
+            this.Controls.Add(this.smartPropertyGrid);
+            this.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "SmartPropertyObjectEditor";
+            this.Size = new System.Drawing.Size(547, 301);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private SmartProperty.SmartPropertyGrid smartPropertyGrid1;
+        private SmartPropertyGrid smartPropertyGrid;
     }
 }

@@ -15,16 +15,16 @@ namespace SuperNiceProject.Host.Lambda.Tests
 {
     public class DeleteFunctionTests
     {
-        private readonly Mock<IDeleteNiceProject> _useCase;
+        private readonly Mock<IDeleteOrder> _useCase;
         private readonly Function _function;
 
-        const int VALID_NiceProjectID = 1234;
+        const int VALID_ID = 1234;
         const string HTTPMETHOD = "DELETE";
         const string HTTPPATH = "/{Id}";
 
         public DeleteFunctionTests()
         {
-            _useCase = new Mock<IDeleteNiceProject>();
+            _useCase = new Mock<IDeleteOrder>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -38,20 +38,20 @@ namespace SuperNiceProject.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnOK()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string>() {
-                {  "NiceProjectId", $"{VALID_NiceProjectID}"}
+                {  "OrderId", $"{VALID_ID}"}
             });
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            _useCase.Verify(x => x.Delete(VALID_NiceProjectID), Times.Once);
+            _useCase.Verify(x => x.Delete(VALID_OrderId), Times.Once);
         }
 
         [Fact]
         public void FunctionHandler_WithInvalidRequest_WillReturnBadRequest()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string>() {
-                {  "RandomString", $"{VALID_NiceProjectID}"}
+                {  "RandomString", $"{VALID_ID}"}
             });
             var task = _function.FunctionHandler(request, null);
 

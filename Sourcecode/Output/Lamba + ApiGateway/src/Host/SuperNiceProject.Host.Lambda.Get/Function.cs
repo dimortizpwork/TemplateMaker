@@ -27,19 +27,19 @@ namespace SuperNiceProject.Host.Lambda.Get
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(RequestModel requestParameters)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IGetNiceProject>();
+            var _useCase = scope.GetInstance<IGetOrder>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                var NiceProject = _useCase.Get(requestParameters.NiceProjectId);
-                if (NiceProject == null)
+                var Order = _useCase.Get(requestParameters.OrderId);
+                if (Order == null)
                     return ApiResponse(statusCode: HttpStatusCode.NotFound, body: null);
-                return ApiResponse(statusCode: HttpStatusCode.OK, body: NiceProject);
+                return ApiResponse(statusCode: HttpStatusCode.OK, body: Order);
             });
         }
 
         public override void RegisterContainer(SimpleInjector.Container container)
         {
-            container.Register<IGetNiceProject, GetNiceProject>();
+            container.Register<IGetOrder, GetOrder>();
         }
     }
 }

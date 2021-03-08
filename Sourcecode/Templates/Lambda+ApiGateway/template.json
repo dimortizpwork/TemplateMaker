@@ -35,25 +35,33 @@
             "Value": "mybrain"
         },
         {
-            "Name": "ModelName",
-            "Type": "String",
-            "Required": true,
-            "Value": "NiceProject"
-        },
-        {
             "Name": "Model",
             "Type": "Object",
             "Required": true,
-            "Parameters":  [{
+            "Value":  [{
                 "Name": "ModelName",
                 "Type": "String",
                 "Required": true,
                 "Value": "Order"
             },{
-                "Name": "PrimaryKey",
+                "Name": "KeyField",
                 "Type": "String",
                 "Required": true,
                 "Value": "OrderId"
+            },{
+                "Name": "SubModel",
+                "Type": "Object",
+                "Required": true,
+                "Value": [{
+                    "Name": "SubModelName",
+                    "Type": "String",
+                    "Required": true,
+                    "Value": "OrderLineId"
+                },{
+                    "Name": "test",
+                    "Type": "TableInfo",
+                    "Required": true
+                }]
             }]
         }
     ]

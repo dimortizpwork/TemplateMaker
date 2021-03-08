@@ -17,7 +17,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 {
     public class PostFunctionTests
     {
-        private readonly Mock<ICreateNiceProject> _useCase;
+        private readonly Mock<ICreateOrder> _useCase;
         private readonly Function _function;
         private readonly Fixture _fixure;
 
@@ -26,7 +26,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 
         public PostFunctionTests()
         {
-            _useCase = new Mock<ICreateNiceProject>();
+            _useCase = new Mock<ICreateOrder>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -51,7 +51,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.Created);
-            _useCase.Verify(x => x.Create(It.IsAny<NiceProjectModel>()), Times.Once);*/
+            _useCase.Verify(x => x.Create(It.IsAny<OrderModel>()), Times.Once);*/
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
-            _useCase.Verify(x => x.Create(It.IsAny<NiceProjectModel>()), Times.Never);*/
+            _useCase.Verify(x => x.Create(It.IsAny<OrderModel>()), Times.Never);*/
         }
     }
 }

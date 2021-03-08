@@ -42,7 +42,7 @@ namespace SuperNiceProject.Oracle.Adapter
 
         private void RegisterRepositories(Container container)
         {
-            container.Register<INiceProjectRepository, NiceProjectRepository>();
+            container.Register<IOrderRepository, OrderRepository>();
         }
         private void RegisterResilience(Container container)
         {

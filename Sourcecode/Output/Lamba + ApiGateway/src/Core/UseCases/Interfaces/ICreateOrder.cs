@@ -2,8 +2,8 @@ using SuperNiceProject.Models;
 
 namespace SuperNiceProject.UseCases.Interfaces
 {
-    public interface IGetNiceProject
+    public interface ICreateOrder
     {
-        NiceProjectModel Get(long NiceProjectId);
+        int Create(OrderModel model);
     }
 }

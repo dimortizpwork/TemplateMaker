@@ -6,23 +6,23 @@ using SuperNiceProject.Models;
 
 namespace SuperNiceProject.Oracle.Adapter.Dto
 {
-    public class NiceProjectDto
+    public class OrderDto
     {
-        public long NiceProjectId { get; set; }
+        public long OrderId { get; set; }
         public string UniqueReference { get; set; }
 
-        public static NiceProjectDto FromModel(NiceProjectModel model)
+        public static OrderDto FromModel(OrderModel model)
         {
-            return new NiceProjectDto {
-                NiceProjectId = model.NiceProjectId,
+            return new OrderDto {
+                OrderId = model.OrderId,
                 UniqueReference = model.UniqueReference
             };
         }
 
-        public NiceProjectModel ToModel()
+        public OrderModel ToModel()
         {
-            return new NiceProjectModel {
-                NiceProjectId = NiceProjectId,
+            return new OrderModel {
+                OrderId = OrderId,
                 UniqueReference = UniqueReference
             };
         }

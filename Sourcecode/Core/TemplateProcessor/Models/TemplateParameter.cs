@@ -25,5 +25,7 @@ namespace TemplateProcessor.Models
         public object Value { get; set; }
         public bool IsCollection { get; set; } = false;
         public IEnumerable<TemplateParameter> Parameters { get; set; }
+
+        public bool IsParameterObject { get => Type == ETemplateParameterType.Object; }
     }
 }

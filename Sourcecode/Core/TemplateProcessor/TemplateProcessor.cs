@@ -47,27 +47,27 @@ namespace TemplateProcessor
         }
         private void ProcessFile(string filePath, dynamic parameters)
         {
-            //Process the file name
-            HandlebarsTemplate<object, object> templateFileName = Handlebars.Compile(filePath.Replace("\\", "//"));
-            string processedFileName = templateFileName(parameters);
-            processedFileName = processedFileName.Replace("//", "\\");
+            try
+            {
+                //Process the file name
+                HandlebarsTemplate<object, object> templateFileName = Handlebars.Compile(filePath.Replace("\\", "//"));
+                string processedFileName = templateFileName(parameters);
+                processedFileName = processedFileName.Replace("//", "\\");
 
-            if ((Template.SearchFileExtensions as IList<string>).IndexOf(Path.GetExtension(filePath)) >= 0){
-                string fileContents = File.ReadAllText(filePath);
-                //Process the file contents
-                try
-                {
+                if ((Template.SearchFileExtensions as IList<string>).IndexOf(Path.GetExtension(filePath)) >= 0){
+                    string fileContents = File.ReadAllText(filePath);
+                    //Process the file contents
                     HandlebarsTemplate<object, object> templateFileContents = Handlebars.Compile(fileContents);
                     string processedFileContents = templateFileContents(parameters);
                     OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), Encoding.ASCII.GetBytes(processedFileContents));
                 }
-                catch(Exception e)
-                {
-                    OnProcessFileError?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), e);
-                }
+                else
+                    OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), File.ReadAllBytes(filePath));
             }
-            else
-                OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), File.ReadAllBytes(filePath));          
+            catch (Exception e)
+            {
+                OnProcessFileError?.Invoke(GetTruncateFilePath(filePath, Template.SearchDirectory), e);
+            }
         }
 
         private string GetTruncateFilePath(string filePath, string root)

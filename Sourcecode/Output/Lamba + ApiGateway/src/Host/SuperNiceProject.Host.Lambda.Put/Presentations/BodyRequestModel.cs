@@ -9,9 +9,9 @@ namespace SuperNiceProject.Host.Lambda.Put.Presentations
     {
         public string UniqueReference { get; set; }
 
-        public NiceProjectModel ToModel()
+        public OrderModel ToModel()
         {
-            return new NiceProjectModel {
+            return new OrderModel {
                 UniqueReference = UniqueReference
             };
         }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Dynamic;
 using TemplateProcessor.Models;
 
@@ -6,17 +8,29 @@ namespace TemplateProcessor
 {
     public class TemplateParameterProcessor
     {
-        public static dynamic Process(IEnumerable<TemplateParameter> properties)
+        public static dynamic Process(IEnumerable<TemplateParameter> parameters)
         {
             IDictionary<string, object> obj = new ExpandoObject();
-            foreach (TemplateParameter property in properties)
-                ProcessProperty(obj, property);
+            ProcessProperties(obj, parameters);
             return obj;
         }
 
-        private static void ProcessProperty(IDictionary<string, object> dictonary, TemplateParameter property)
+        private static void ProcessProperties(IDictionary<string, object> dictonary, IEnumerable<TemplateParameter> parameters)
         {
-            dictonary.Add(property.Name, property.Value);
+            foreach (TemplateParameter parameter in parameters)
+                ProcessProperty(dictonary, parameter);
+        }
+
+        private static void ProcessProperty(IDictionary<string, object> dictonary, TemplateParameter parameter)
+        {
+            if (parameter.IsParameterObject)
+            {
+                IDictionary<string, object> obj = new ExpandoObject();
+                ProcessProperties(obj, parameter.Value as IEnumerable<TemplateParameter>);
+                dictonary.Add(parameter.Name, obj);
+            }
+            else
+                dictonary.Add(parameter.Name, parameter.Value);
         }
     }
 }

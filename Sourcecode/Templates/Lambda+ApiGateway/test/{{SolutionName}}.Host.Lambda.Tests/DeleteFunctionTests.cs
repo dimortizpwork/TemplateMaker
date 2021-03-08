@@ -15,16 +15,16 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 {
     public class DeleteFunctionTests
     {
-        private readonly Mock<IDelete{{ModelName}}> _useCase;
+        private readonly Mock<IDelete{{Model.ModelName}}> _useCase;
         private readonly Function _function;
 
-        const int VALID_{{ModelName}}ID = 1234;
+        const int VALID_ID = 1234;
         const string HTTPMETHOD = "DELETE";
         const string HTTPPATH = "/{Id}";
 
         public DeleteFunctionTests()
         {
-            _useCase = new Mock<IDelete{{ModelName}}>();
+            _useCase = new Mock<IDelete{{Model.ModelName}}>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -38,20 +38,20 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnOK()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string>() {
-                {  "{{ModelName}}Id", $"{VALID_{{ModelName}}ID}"}
+                {  "{{Model.KeyField}}", $"{VALID_ID}"}
             });
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            _useCase.Verify(x => x.Delete(VALID_{{ModelName}}ID), Times.Once);
+            _useCase.Verify(x => x.Delete(VALID_{{Model.KeyField}}), Times.Once);
         }
 
         [Fact]
         public void FunctionHandler_WithInvalidRequest_WillReturnBadRequest()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string>() {
-                {  "RandomString", $"{VALID_{{ModelName}}ID}"}
+                {  "RandomString", $"{VALID_ID}"}
             });
             var task = _function.FunctionHandler(request, null);
 

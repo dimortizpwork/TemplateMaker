@@ -27,19 +27,19 @@ namespace {{SolutionName}}.Host.Lambda.Get
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(RequestModel requestParameters)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IGet{{ModelName}}>();
+            var _useCase = scope.GetInstance<IGet{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                var {{ModelName}} = _useCase.Get(requestParameters.{{ModelName}}Id);
-                if ({{ModelName}} == null)
+                var {{Model.ModelName}} = _useCase.Get(requestParameters.{{Model.KeyField}});
+                if ({{Model.ModelName}} == null)
                     return ApiResponse(statusCode: HttpStatusCode.NotFound, body: null);
-                return ApiResponse(statusCode: HttpStatusCode.OK, body: {{ModelName}});
+                return ApiResponse(statusCode: HttpStatusCode.OK, body: {{Model.ModelName}});
             });
         }
 
         public override void RegisterContainer(SimpleInjector.Container container)
         {
-            container.Register<IGet{{ModelName}}, Get{{ModelName}}>();
+            container.Register<IGet{{Model.ModelName}}, Get{{Model.ModelName}}>();
         }
     }
 }

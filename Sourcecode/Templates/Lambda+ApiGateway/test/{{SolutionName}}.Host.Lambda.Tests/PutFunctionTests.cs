@@ -18,17 +18,17 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 {
     public class PutFunctionTests
     {
-        private readonly Mock<IUpdate{{ModelName}}> _useCase;
+        private readonly Mock<IUpdate{{Model.ModelName}}> _useCase;
         private readonly Function _function;
         private readonly Fixture _fixure;
 
-        const int {{ModelName}}ID = 7784;
+        const int VALID_ID = 7784;
         const string HTTPMETHOD = "PUT";
         const string HTTPPATH = "/{Id}";
 
         public PutFunctionTests()
         {
-            _useCase = new Mock<IUpdate{{ModelName}}>();
+            _useCase = new Mock<IUpdate{{Model.ModelName}}>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -44,13 +44,13 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnCreated()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{ModelName}}Id", {{ModelName}}ID.ToString() }
+                { "{{Model.KeyField}}", VALID_ID.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            _useCase.Verify(x => x.Update({{ModelName}}ID, It.IsAny<{{ModelName}}Model>()), Times.Once);
+            _useCase.Verify(x => x.Update(VALID_ID, It.IsAny<{{Model.ModelName}}Model>()), Times.Once);
         }
 
         [Fact]
@@ -63,13 +63,13 @@ namespace {{SolutionName}}.Host.Lambda.Tests
             );
 
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{ModelName}}Id", {{ModelName}}ID.ToString() }
+                { "{{Model.KeyField}}", {{Model.KeyField}}.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
-            _useCase.Verify(x => x.Update({{ModelName}}ID, It.IsAny<{{ModelName}}Model>()), Times.Never);*/
+            _useCase.Verify(x => x.Update({{Model.KeyField}}, It.IsAny<{{Model.ModelName}}Model>()), Times.Never);*/
         }
     }
 }

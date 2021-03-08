@@ -1,13 +1,13 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "CloudFront certificate for the net-super-nice-roject"
+Description: "CloudFront certificate for the net-super-nice-project"
 Metadata:
-  AlertIdentifier: "net-super-nice-roject"
+  AlertIdentifier: "net-super-nice-project"
   Tags:
     CostCenter: "mybrain"
 Parameters:
   AppGroup:
     Type: "String"
-    Default: "net-super-nice-roject"
+    Default: "net-super-nice-project"
     Description: "The name of the AppGroup"
     AllowedPattern: "^[a-z0-9\-]{1,32}$"
   Environment:

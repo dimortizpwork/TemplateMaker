@@ -43,6 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editors\Editor\SmartPropertyObjectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editors\Editor\SmartPropertyObjectEditor.Designer.cs">
+      <DependentUpon>SmartPropertyObjectEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editors\Forms\FormSmartPropertyCollectionEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editors\Editor\SmartPropertyObjectEditor.resx">
+      <DependentUpon>SmartPropertyObjectEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editors\Forms\FormSmartPropertyCollectionEditor.resx">
       <DependentUpon>FormSmartPropertyCollectionEditor.cs</DependentUpon>
     </EmbeddedResource>

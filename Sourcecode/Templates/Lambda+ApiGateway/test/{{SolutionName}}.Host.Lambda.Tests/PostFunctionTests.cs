@@ -17,7 +17,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 {
     public class PostFunctionTests
     {
-        private readonly Mock<ICreate{{ModelName}}> _useCase;
+        private readonly Mock<ICreate{{Model.ModelName}}> _useCase;
         private readonly Function _function;
         private readonly Fixture _fixure;
 
@@ -26,7 +26,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 
         public PostFunctionTests()
         {
-            _useCase = new Mock<ICreate{{ModelName}}>();
+            _useCase = new Mock<ICreate{{Model.ModelName}}>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -51,7 +51,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.Created);
-            _useCase.Verify(x => x.Create(It.IsAny<{{ModelName}}Model>()), Times.Once);*/
+            _useCase.Verify(x => x.Create(It.IsAny<{{Model.ModelName}}Model>()), Times.Once);*/
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
-            _useCase.Verify(x => x.Create(It.IsAny<{{ModelName}}Model>()), Times.Never);*/
+            _useCase.Verify(x => x.Create(It.IsAny<{{Model.ModelName}}Model>()), Times.Never);*/
         }
     }
 }

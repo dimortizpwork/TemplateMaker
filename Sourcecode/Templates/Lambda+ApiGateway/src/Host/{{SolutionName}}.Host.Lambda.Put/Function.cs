@@ -27,17 +27,17 @@ namespace {{SolutionName}}.Host.Lambda.Put
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(PathRequestModel requestParameters, BodyRequestModel requestBody)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IUpdate{{ModelName}}>();
+            var _useCase = scope.GetInstance<IUpdate{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Update(requestParameters.{{ModelName}}Id, requestBody.ToModel());
+                _useCase.Update(requestParameters.{{Model.KeyField}}, requestBody.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }
 
         public override void RegisterContainer(Container container)
         {
-            container.Register<IUpdate{{ModelName}}, Update{{ModelName}}>();
+            container.Register<IUpdate{{Model.ModelName}}, Update{{Model.ModelName}}>();
         }
     }
 }

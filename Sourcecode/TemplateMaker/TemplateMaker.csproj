@@ -81,12 +81,6 @@
     <Compile Include="Types\TableInfoType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\PropertyEditors\ObjectPropertyEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\PropertyEditors\ObjectPropertyEditor.Designer.cs">
-      <DependentUpon>ObjectPropertyEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\PropertyEditors\ApiInfoPropertyEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,9 +109,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\PropertyEditors\ObjectPropertyEditor.resx">
-      <DependentUpon>ObjectPropertyEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\PropertyEditors\ApiInfoPropertyEditor.resx">
       <DependentUpon>ApiInfoPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>

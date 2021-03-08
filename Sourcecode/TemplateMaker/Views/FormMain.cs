@@ -36,12 +36,18 @@ namespace TemplateMaker.Viewer
         {
             CurrentTemplate = template;
             richTextBoxDescription.Text = CurrentTemplate.Description;
-            CurrentProperties = new List<IProperty>();
-            foreach (TemplateParameter parameter in CurrentTemplate.Parameters)
-                CurrentProperties.Add(new Property(parameter));
+            CurrentProperties = ConvertParameterToProperty(CurrentTemplate.Parameters);
             smartPropertyGrid.LoadProperties(CurrentProperties);
 
             ShowTemplateParameters();
+        }
+
+        private List<IProperty> ConvertParameterToProperty(IEnumerable<TemplateParameter> parameters)
+        {
+            List<IProperty> properties = new List<IProperty>();
+            foreach (TemplateParameter parameter in parameters)
+                properties.Add(new Property(parameter));
+            return properties;
         }
 
         private void ShowTemplateParameters()

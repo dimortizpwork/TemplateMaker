@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
 Description: "It's just a super nice project"
 Metadata:
-  AlertIdentifier: "net-super-nice-roject"
+  AlertIdentifier: "net-super-nice-project"
   Tags:
     CostCenter: "mybrain"
 Parameters:
@@ -14,7 +14,7 @@ Parameters:
       - "eu-west-1"
   AppGroup:
     Type: String
-    Default: "net-super-nice-roject"
+    Default: "net-super-nice-project"
     Description: "It's just a super nice project"
     AllowedPattern: "^[a-z0-9\-]{1,22}$"
   Environment:

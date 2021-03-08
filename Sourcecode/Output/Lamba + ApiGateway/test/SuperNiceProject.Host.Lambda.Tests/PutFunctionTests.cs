@@ -18,17 +18,17 @@ namespace SuperNiceProject.Host.Lambda.Tests
 {
     public class PutFunctionTests
     {
-        private readonly Mock<IUpdateNiceProject> _useCase;
+        private readonly Mock<IUpdateOrder> _useCase;
         private readonly Function _function;
         private readonly Fixture _fixure;
 
-        const int NiceProjectID = 7784;
+        const int VALID_ID = 7784;
         const string HTTPMETHOD = "PUT";
         const string HTTPPATH = "/{Id}";
 
         public PutFunctionTests()
         {
-            _useCase = new Mock<IUpdateNiceProject>();
+            _useCase = new Mock<IUpdateOrder>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -44,13 +44,13 @@ namespace SuperNiceProject.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnCreated()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "NiceProjectId", NiceProjectID.ToString() }
+                { "OrderId", VALID_ID.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            _useCase.Verify(x => x.Update(NiceProjectID, It.IsAny<NiceProjectModel>()), Times.Once);
+            _useCase.Verify(x => x.Update(VALID_ID, It.IsAny<OrderModel>()), Times.Once);
         }
 
         [Fact]
@@ -63,13 +63,13 @@ namespace SuperNiceProject.Host.Lambda.Tests
             );
 
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "NiceProjectId", NiceProjectID.ToString() }
+                { "OrderId", OrderId.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
-            _useCase.Verify(x => x.Update(NiceProjectID, It.IsAny<NiceProjectModel>()), Times.Never);*/
+            _useCase.Verify(x => x.Update(OrderId, It.IsAny<OrderModel>()), Times.Never);*/
         }
     }
 }

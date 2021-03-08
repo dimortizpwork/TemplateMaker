@@ -1,11 +1,11 @@
 using System;
 
-namespace {{SolutionName}}.Models
+namespace SuperNiceProject.Models
 {
-    public class {{ModelName}}Model
+    public class OrderModel
     {
-        public long {{ModelName}}Id { get; set; }
-        public long {{ModelName}}StateId { get; set; }
+        public long OrderId { get; set; }
+        public long OrderStateId { get; set; }
         public string UniqueReference { get; set; }
         public long ShopId { get; set; }
         public long OrderId { get; set; }

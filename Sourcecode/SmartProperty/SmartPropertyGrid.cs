@@ -1,4 +1,6 @@
 ﻿using SmartProperty.EditorFactory;
+using SmartProperty.Editors.Editor;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -54,10 +56,17 @@ namespace SmartProperty
         {
             IProperty property = Properties[e.RowIndex];
 
-            if (property.GetIsCollection() || property.GetEditorType() != null)
+            if (property.GetIsCollection() || property.GetIsParameterObject() || property.GetCustomEditorType() != null)
             {
                 e.Cancel = true;
-                object value = SmartPropetyEditorFactory.OpenEditor(property.GetEditorType(), property.GetValue(), property.GetIsCollection());
+
+                Type editorType;
+                if (property.GetIsParameterObject())
+                    editorType = typeof(SmartPropertyObjectEditor);
+                else
+                    editorType = property.GetCustomEditorType();
+
+                object value = SmartPropetyEditorFactory.OpenEditor(editorType, property.GetValue(), property.GetIsCollection());
                 property.SetValue(value);
                 dataGridView.Rows[Properties.IndexOf(property)].Cells["ColumnPropertyValue"].Value = property.GetDisplayValue();
                 PropertyValueChanged?.Invoke(property);

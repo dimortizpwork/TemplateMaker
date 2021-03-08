@@ -27,17 +27,17 @@ namespace SuperNiceProject.Host.Lambda.Put
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(PathRequestModel requestParameters, BodyRequestModel requestBody)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IUpdateNiceProject>();
+            var _useCase = scope.GetInstance<IUpdateOrder>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Update(requestParameters.NiceProjectId, requestBody.ToModel());
+                _useCase.Update(requestParameters.OrderId, requestBody.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }
 
         public override void RegisterContainer(Container container)
         {
-            container.Register<IUpdateNiceProject, UpdateNiceProject>();
+            container.Register<IUpdateOrder, UpdateOrder>();
         }
     }
 }

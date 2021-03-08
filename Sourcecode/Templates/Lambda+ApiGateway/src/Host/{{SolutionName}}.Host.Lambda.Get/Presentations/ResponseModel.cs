@@ -4,8 +4,8 @@ namespace {{SolutionName}}.Host.Lambda.Get.Presentations
 {
     public class ResponseModel
     {
-        public long {{ModelName}}Id { get; set; }
-        public long {{ModelName}}StateId { get; set; }
+        public long {{Model.KeyField}} { get; set; }
+        public long {{Model.ModelName}}StateId { get; set; }
         public string UniqueReference { get; set; }
         public long ShopId { get; set; }
         public long CurrencyId { get; set; }

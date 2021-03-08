@@ -5,12 +5,12 @@ namespace SuperNiceProject.Host.Lambda.Delete.Presentations
 {
     public class RequestModel: IRequestModel
     {
-        public long NiceProjectId { get; set; }
+        public long OrderId { get; set; }
 
         public void Validate()
         {
-            if (NiceProjectId <= 0)
-                throw new InvalidRequestException("Field NiceProjectId invalid or not defined");
+            if (OrderId <= 0)
+                throw new InvalidRequestException("Field OrderId invalid or not defined");
         }
 
     }

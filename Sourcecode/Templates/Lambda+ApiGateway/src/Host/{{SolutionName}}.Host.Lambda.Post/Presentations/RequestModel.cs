@@ -9,9 +9,9 @@ namespace {{SolutionName}}.Host.Lambda.Post.Presentations
     {
         public string UniqueReference { get; set; }
 
-        public {{ModelName}}Model ToModel()
+        public {{Model.ModelName}}Model ToModel()
         {
-            return new {{ModelName}}Model {
+            return new {{Model.ModelName}}Model {
                 UniqueReference = UniqueReference
             };
         }

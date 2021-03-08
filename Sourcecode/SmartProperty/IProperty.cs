@@ -10,7 +10,8 @@ namespace SmartProperty
         object GetValue();
         void SetValue(object value);
         Type GetValueType();
-        Type GetEditorType();
+        Type GetCustomEditorType();
         bool GetIsCollection();
+        bool GetIsParameterObject();
     }
 }

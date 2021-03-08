@@ -26,17 +26,17 @@ namespace {{SolutionName}}.Host.Lambda.Delete
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(RequestModel requestParameters)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IDelete{{ModelName}}>();
+            var _useCase = scope.GetInstance<IDelete{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Delete(requestParameters.{{ModelName}}Id);
+                _useCase.Delete(requestParameters.{{Model.KeyField}});
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }
 
         public override void RegisterContainer(SimpleInjector.Container container)
         {
-            container.Register<IDelete{{ModelName}}, Delete{{ModelName}}>();
+            container.Register<IDelete{{Model.ModelName}}, Delete{{Model.ModelName}}>();
         }
     }
 }

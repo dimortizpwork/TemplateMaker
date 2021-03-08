@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "IAM resources for net-super-nice-roject service"
+Description: "IAM resources for net-super-nice-project service"
 Metadata:
   AlertIdentifier: "mybrain"
   Tags:
@@ -7,7 +7,7 @@ Metadata:
 Parameters:
   AppGroup:
     Type: "String"
-    Default: "net-super-nice-roject"
+    Default: "net-super-nice-project"
     AllowedPattern: "^[a-z0-9\-]{1,21}$"
   Environment:
     Type: "AWS::SSM::Parameter::Value<String>"

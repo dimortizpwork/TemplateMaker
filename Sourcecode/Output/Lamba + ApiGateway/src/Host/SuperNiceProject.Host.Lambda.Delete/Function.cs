@@ -26,17 +26,17 @@ namespace SuperNiceProject.Host.Lambda.Delete
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(RequestModel requestParameters)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _useCase = scope.GetInstance<IDeleteNiceProject>();
+            var _useCase = scope.GetInstance<IDeleteOrder>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Delete(requestParameters.NiceProjectId);
+                _useCase.Delete(requestParameters.OrderId);
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }
 
         public override void RegisterContainer(SimpleInjector.Container container)
         {
-            container.Register<IDeleteNiceProject, DeleteNiceProject>();
+            container.Register<IDeleteOrder, DeleteOrder>();
         }
     }
 }

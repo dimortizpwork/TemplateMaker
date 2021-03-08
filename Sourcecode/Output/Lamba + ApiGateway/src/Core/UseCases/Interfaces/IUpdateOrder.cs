@@ -2,8 +2,8 @@ using SuperNiceProject.Models;
 
 namespace SuperNiceProject.UseCases.Interfaces
 {
-    public interface ICreateNiceProject
+    public interface IUpdateOrder
     {
-        int Create(NiceProjectModel model);
+        void Update(long OrderId, OrderModel model);
     }
 }

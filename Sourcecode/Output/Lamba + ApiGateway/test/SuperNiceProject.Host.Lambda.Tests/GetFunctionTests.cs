@@ -15,7 +15,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 {
     public class GetFunctionTests
     {
-        private readonly Mock<IGetNiceProject> _useCase;
+        private readonly Mock<IGetOrder> _useCase;
         private readonly Function _function;
 
         const int INVITO_TO_PAYID = 999;
@@ -24,7 +24,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
 
         public GetFunctionTests()
         {
-            _useCase = new Mock<IGetNiceProject>();
+            _useCase = new Mock<IGetOrder>();
 
             var container = new Container();
             container.RegisterInstance(_useCase.Object);
@@ -38,7 +38,7 @@ namespace SuperNiceProject.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnNotFound()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "NiceProjectId", INVITO_TO_PAYID.ToString() }
+                { "OrderId", INVITO_TO_PAYID.ToString() }
             });
             var task = _function.FunctionHandler(request, null);
 
