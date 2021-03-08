@@ -124,6 +124,10 @@ namespace TemplateMaker.Viewer
                     Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
                 File.WriteAllBytes(outputFilePath, fileContents);
             };
+            processor.OnProcessFileError += (string file, Exception exception) =>
+            {
+                MessageBox.Show($"An error ocurred when processing the template: {exception.Message}", "Atention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
             processor.Process(GetTemplateParameters());
         }
 

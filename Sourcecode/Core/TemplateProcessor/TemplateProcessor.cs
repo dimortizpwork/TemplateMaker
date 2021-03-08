@@ -1,4 +1,5 @@
 ﻿using HandlebarsDotNet;
+using System;
 using System.IO;
 using System.Text;
 using TemplateProcessor.Helpers.SmartString;
@@ -8,9 +9,11 @@ using TemplateProcessor.Models;
 namespace TemplateProcessor
 {
     public delegate void TemplateProcessorOnProcessFileHandler(string filePath, byte[] fileContents);
+    public delegate void TemplateProcessorOnProcessFileErrorHandler(string filePath, Exception exception);
     public class TemplateProcessor
     {
-        public TemplateProcessorOnProcessFileHandler OnProcessFile;
+        public event TemplateProcessorOnProcessFileHandler OnProcessFile;
+        public event TemplateProcessorOnProcessFileErrorHandler OnProcessFileError;
         private readonly Template Template;
         public TemplateProcessor(Template template)
         {
@@ -51,9 +54,15 @@ namespace TemplateProcessor
                 string fileContents = File.ReadAllText(filePath);
                 //Process the file contents
                 HandlebarsTemplate<object, object> templateFileContents = Handlebars.Compile(fileContents);
-                string processedFileContents = templateFileContents(parameters);
-
-                OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), Encoding.ASCII.GetBytes(processedFileContents));
+                try
+                {
+                    string processedFileContents = templateFileContents(parameters);
+                    OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), Encoding.ASCII.GetBytes(processedFileContents));
+                }
+                catch(Exception e)
+                {
+                    OnProcessFileError?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), e);
+                }
             }
             else
                 OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), File.ReadAllBytes(filePath));          

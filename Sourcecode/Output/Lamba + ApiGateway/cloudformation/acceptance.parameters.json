@@ -1,0 +1,22 @@
+[
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "acceptance"
+  },
+  {
+    "ParameterKey": "OracleConnectionString",
+    "ParameterValue": "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={OracleHostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={OracleUserName};Password = {OraclePassword}"
+  },
+  {
+    "ParameterKey": "OracleHostName",
+    "ParameterValue": "acceptance-oracle-vanessa-main.crahnowsk2gd.eu-west-1.rds.amazonaws.com"
+  },
+  {
+    "ParameterKey": "OracleUserName",
+    "ParameterValue": "{{ApiOracleUser}}"
+  },
+  {
+    "ParameterKey": "OraclePassword",
+    "ParameterValue": "AQICAHj2x/FMuIEXez6dqH3shba5VhQLp1Q/FGVSzQXZO4rKfAH+VZ/RlKR51UQIqli8Hw9tAAAAZDBiBgkqhkiG9w0BBwagVTBTAgEAME4GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM1eZ1W1U0VpJ7oKpwAgEQgCHbxL1HenvFCimQDMSN5xYkREgk3MpnrHevEFA5wy8hxx4="
+  }
+]

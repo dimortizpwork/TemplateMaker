@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AWSProjectType>Lambda</AWSProjectType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.4.0" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.2.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.8.0" />
+    
+    <PackageReference Include="Coolblue.Utilities.MonitoringEvents.Aws.Lambda.Datadog" Version="2.1.0" />
+    <PackageReference Include="Coolblue.Utilities.MonitoringEvents.SimpleInjector" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.11" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.11" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="SimpleInjector" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\InviteToPay.Oracle.Adapter\InviteToPay.Oracle.Adapter.csproj" />
+    <ProjectReference Include="..\..\Core\InviteToPay.csproj" />
+    <ProjectReference Include="..\..\Adapters\InviteToPay.SecretManagement.Adapter\InviteToPay.SecretManagement.Adapter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="development.parameters.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

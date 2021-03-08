@@ -1,0 +1,44 @@
+{
+    "Name": "Lamba + ApiGateway",
+    "Description": "Create a lambda with apigateaway endpoints",
+    "SearchDirectory": null,
+    "SearchFileExtensions": [".sql", ".txt", ".cake", ".csproj", ".sln", ".cs", ".md", ".yaml"],
+    "Properties": [
+        {
+            "Name": "SolutionName",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "SuperNiceProject"
+        },
+        {
+            "Name": "ApiOracleUser",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "SRV_SUPER_NICE"
+        },
+        {
+            "Name": "GitHubRepositoryName",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "net-super-nice-roject"
+        },
+        {
+            "Name": "ProjectDescription",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "It's just a super nice project"
+        },
+        {
+            "Name": "CostCenter",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "mybrain"
+        },
+        {
+            "Name": "ModelName",
+            "Type": "String",
+            "Required": true,
+            "DefaultValue": "NiceProject"
+        }
+    ]
+}

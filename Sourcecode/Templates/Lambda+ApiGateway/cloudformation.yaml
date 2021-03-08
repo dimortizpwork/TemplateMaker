@@ -1,0 +1,569 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: "{{ProjectDescription}}"
+Metadata:
+  AlertIdentifier: "{{GitHubRepositoryName}}"
+  Tags:
+    CostCenter: "{{CostCenter}}"
+Parameters:
+  Region:
+    Description: "Specify the region"
+    Type: "String"
+    Default: "eu-west-1"
+    AllowedValues:
+      - "eu-west-1"
+  AppGroup:
+    Type: String
+    Default: "{{GitHubRepositoryName}}"
+    Description: "{{ProjectDescription}}"
+    AllowedPattern: "^[a-z0-9\\-]{1,22}$"
+  Environment:
+    Type: String
+    AllowedValues:
+      - development
+      - testing
+      - acceptance
+      - production
+    Default: testing
+    ConstraintDescription: Must be one of the values from the list.
+    Description: Environment in which resources are deployed.
+  OracleConnectionString:
+    Type: "String"
+    Default: "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={HostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={UserName};Password = {Password}"
+    Description: "Oracle connection string. Contains {} placeholders for values to be substituted"
+  OracleUserName:
+    Type: "String"
+    Default: "{{ApiOracleUser}}"
+  OraclePassword:
+    Type: "String"
+    NoEcho: true
+  OracleHostName:
+    Type: "String"
+Mappings:
+  Environment:
+    testing:
+      OracleCidr: "192.168.112.32/28"
+    acceptance:
+      OracleCidr: "192.168.112.32/28"
+    production:
+      OracleCidr: "192.168.67.16/28"
+
+Conditions:
+  NonDevelopmentResources: !Not [ !Equals [ !Ref Environment, "development" ] ]
+
+Resources:
+  ApiKey:
+    Type: "AWS::ApiGateway::ApiKey"
+    Properties: 
+      Enabled: true
+      StageKeys:
+        -
+          RestApiId: !Ref "ServerlessApi"
+          StageName: !Ref "ServerlessApiStage" # this resource is created by CloudFormation transform
+
+  DomainName:
+    Type: AWS::ApiGateway::DomainName
+    Condition: NonDevelopmentResources
+    Properties:
+      CertificateArn: !GetAtt "CloudFrontCertificateArn.CertificateArn"
+      DomainName: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+
+  CloudFrontCertificateArn:
+    Type: "Custom::GetCertificateArn"
+    Condition: NonDevelopmentResources
+    Properties:
+      ServiceToken: !ImportValue "custom-resource-get-certificate"
+      CertificateName: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+
+
+  BasePathMapping:
+    Type: "AWS::ApiGateway::BasePathMapping"
+    Condition: NonDevelopmentResources
+    Properties:
+      DomainName: !Ref "DomainName"
+      RestApiId: !Ref "ServerlessApi"
+      Stage: !Ref "ServerlessApiStage"
+
+###----------------------------------Functions--------------------------------------###
+  GetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Make sure handler is 128 characters or less
+      Handler: "{{SolutionName}}.Host.Lambda.Get::{{SolutionName}}.Host.Lambda.Get.Function::FunctionHandler"
+      Runtime: dotnetcore3.1
+      CodeUri: ./artifacts/{{SolutionName}}.Host.Lambda.Get.zip
+      Description: {{ProjectDescription}}
+      MemorySize: 512
+      Timeout: 15
+      FunctionName: !Sub "${AppGroup}-lambda-get"
+      VpcConfig:
+        SecurityGroupIds:
+          - !ImportValue "oracle-vanessa-main-security-group"
+          - !Ref "PrivateSecurityGroup"
+        SubnetIds: !Split [",", !ImportValue "infrastructure-lambda-subnets"]
+      Tags:
+        Name: !Sub "${AWS::StackName}"
+        AppGroup: !Sub "${AWS::StackName}"
+        AppRole: "function"
+        Environment: !Ref "Environment"
+      Role: 
+        !ImportValue "iam-lambda-basic-execution-role-arn"
+      Environment:
+        Variables:
+          Environment: !Ref Environment
+          OracleConnectionString: !Ref OracleConnectionString
+          OracleUserName: !Ref OracleUserName
+          OraclePassword: !Ref OraclePassword
+          OracleHostName: !Ref OracleHostName
+      Events:
+        GetApi:
+          Type: "Api"
+          Properties:
+            Method: "GET"
+            Path: "/{id}"
+            RestApiId: !Ref "ServerlessApi"
+  GetFunctionPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetFunction
+      Principal: apigateway.amazonaws.com
+  #-------------------------------------------------------------#
+  PutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Make sure handler is 128 characters or less
+      Handler: "{{SolutionName}}.Host.Lambda.Put::{{SolutionName}}.Host.Lambda.Put.Function::FunctionHandler"
+      Runtime: dotnetcore3.1
+      CodeUri: ./artifacts/{{SolutionName}}.Host.Lambda.Put.zip
+      Description: {{ProjectDescription}}
+      MemorySize: 512
+      Timeout: 15
+      FunctionName: !Sub "${AppGroup}-lambda-put"
+      VpcConfig:
+        SecurityGroupIds:
+          - !ImportValue "oracle-vanessa-main-security-group"
+          - !Ref "PrivateSecurityGroup"
+        SubnetIds: !Split [",", !ImportValue "infrastructure-lambda-subnets"]
+      Tags:
+        Name: !Sub "${AWS::StackName}"
+        AppGroup: !Sub "${AWS::StackName}"
+        AppRole: "function"
+        Environment: !Ref "Environment"
+      Role: 
+        !ImportValue "iam-lambda-basic-execution-role-arn"
+      Environment:
+        Variables:
+          Environment: !Ref Environment
+          OracleConnectionString: !Ref OracleConnectionString
+          OracleUserName: !Ref OracleUserName
+          OraclePassword: !Ref OraclePassword
+          OracleHostName: !Ref OracleHostName
+      Events:
+        GetApi:
+          Type: "Api"
+          Properties:
+            Method: "PUT"
+            Path: "/{id}"
+            RestApiId: !Ref "ServerlessApi"
+  PutFunctionPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref PutFunction
+      Principal: apigateway.amazonaws.com
+  #-------------------------------------------------------------#
+  DeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Make sure handler is 128 characters or less
+      Handler: "{{SolutionName}}.Host.Lambda.Delete::{{SolutionName}}.Host.Lambda.Delete.Function::FunctionHandler"
+      Runtime: dotnetcore3.1
+      CodeUri: ./artifacts/{{SolutionName}}.Host.Lambda.Delete.zip
+      Description: {{ProjectDescription}}
+      MemorySize: 512
+      Timeout: 15
+      FunctionName: !Sub "${AppGroup}-lambda-delete"
+      VpcConfig:
+        SecurityGroupIds:
+          - !ImportValue "oracle-vanessa-main-security-group"
+          - !Ref "PrivateSecurityGroup"
+        SubnetIds: !Split [",", !ImportValue "infrastructure-lambda-subnets"]
+      Tags:
+        Name: !Sub "${AWS::StackName}"
+        AppGroup: !Sub "${AWS::StackName}"
+        AppRole: "function"
+        Environment: !Ref "Environment"
+      Role: 
+        !ImportValue "iam-lambda-basic-execution-role-arn"
+      Environment:
+        Variables:
+          Environment: !Ref Environment
+          OracleConnectionString: !Ref OracleConnectionString
+          OracleUserName: !Ref OracleUserName
+          OraclePassword: !Ref OraclePassword
+          OracleHostName: !Ref OracleHostName
+      Events:
+        GetApi:
+          Type: "Api"
+          Properties:
+            Method: "DELETE"
+            Path: "/{id}"
+            RestApiId: !Ref "ServerlessApi"
+  DeleteFunctionPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref DeleteFunction
+      Principal: apigateway.amazonaws.com
+  #-------------------------------------------------------------#
+  PostFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      # Make sure handler is 128 characters or less
+      Handler: "{{SolutionName}}.Host.Lambda.Post::{{SolutionName}}.Host.Lambda.Post.Function::FunctionHandler"
+      Runtime: dotnetcore3.1
+      CodeUri: ./artifacts/{{SolutionName}}.Host.Lambda.Post.zip
+      Description: {{ProjectDescription}}
+      MemorySize: 512
+      Timeout: 15
+      FunctionName: !Sub "${AppGroup}-lambda-post"
+      VpcConfig:
+        SecurityGroupIds:
+          - !ImportValue "oracle-vanessa-main-security-group"
+          - !Ref "PrivateSecurityGroup"
+        SubnetIds: !Split [",", !ImportValue "infrastructure-lambda-subnets"]
+      Tags:
+        Name: !Sub "${AWS::StackName}"
+        AppGroup: !Sub "${AWS::StackName}"
+        AppRole: "function"
+        Environment: !Ref "Environment"
+      Role: 
+        !ImportValue "iam-lambda-basic-execution-role-arn"
+      Environment:
+        Variables:
+          Environment: !Ref Environment
+          OracleConnectionString: !Ref OracleConnectionString
+          OracleUserName: !Ref OracleUserName
+          OraclePassword: !Ref OraclePassword
+          OracleHostName: !Ref OracleHostName
+      Events:
+        GetApi:
+          Type: "Api"
+          Properties:
+            Method: "POST"
+            Path: "/create"
+            RestApiId: !Ref "ServerlessApi"
+  PostFunctionPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref PostFunction
+      Principal: apigateway.amazonaws.com
+###------------------------------------------------------------------------------------###
+  PrivateSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "Allowed incoming/outgoing traffic to/from the internal resources"
+      SecurityGroupEgress:
+        - CidrIp: !FindInMap ["Environment", !Ref "Environment", "OracleCidr"]
+          FromPort: 1521
+          ToPort: 1521
+          IpProtocol: "tcp"
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 443
+          ToPort: 443
+          IpProtocol: "tcp"
+      VpcId: !ImportValue "infrastructure-vpc"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${AWS::StackName}-private"
+        - Key: "AppRole"
+          Value: "security-group"
+        - Key: "Environment"
+          Value: !Ref "Environment"
+        - Key: "AppGroup"
+          Value: !Ref "AppGroup"            
+  PrivateSecurityGroupIngress:
+    Type: "AWS::EC2::SecurityGroupIngress"
+    Properties:
+      Description: "Security Group Ingress for pin terminal payment Lambda"
+      GroupId: !Ref "PrivateSecurityGroup"
+      IpProtocol: "tcp"
+      FromPort: 2484
+      ToPort: 2484
+      SourceSecurityGroupId: !Ref "PrivateSecurityGroup"
+  PrivateSecurityGroupEgress:
+    Type: "AWS::EC2::SecurityGroupEgress"
+    Properties:
+      Description: "Security Group Egress for pin terminal payment Lambda"
+      GroupId: !Ref "PrivateSecurityGroup"
+      IpProtocol: "tcp"
+      FromPort: 2484
+      ToPort: 2484
+      DestinationSecurityGroupId: !Ref "PrivateSecurityGroup"
+  ServerlessApi:  
+    Type: "AWS::Serverless::Api"
+    Name: "invite-to-pay-service-api"    
+    Properties:
+      StageName: !Ref "Environment"
+      DefinitionBody:
+        swagger: "2.0"
+        info:
+          title: !Ref "AWS::StackName"
+          version: "2018-01-11-11:40"
+        basePath: !Sub "/${Environment}"
+        schemes:
+          - "https"
+        securityDefinitions:
+          api_key:
+            type: 'apiKey'
+            name: 'x-api-key'
+            in: 'header'
+        paths:
+          /{id}:
+            get:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: {{SolutionName}}id
+                requited: true
+                in: path
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${GetFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+            put:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: {{SolutionName}}id
+                requited: true
+                in: path
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${PutFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+            delete:
+              consumes:
+              - "application/json"
+              produces: 
+              - "application/json"
+              parameters:
+              - name: {{SolutionName}}id
+                requited: true
+                in: path
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${DeleteFunction.Arn}/invocations"
+                passthroughBehavior: 'when_no_match'
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+          /create:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '201':
+                  description: "201 created"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${PostFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+          /send:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - name: "{{SolutionName}}id"
+                type: integer
+                required: true
+                in: "body"
+              - name: "userid"
+                type: integer
+                required: true
+                in: "body"
+              - name: "recipient"
+                type: string
+                required: false
+                in: "body"
+              responses:
+                '200':
+                  description: "200 response"
+                  schema:
+                    $ref: '#/definitions/Empty'
+                  headers:
+                    Access-Control-Allow-Headers:
+                      type: 'string'
+                    Access-Control-Allow-Methods:
+                      type: 'string'
+                    Access-Control-Allow-Origin:
+                      type: 'string'
+              security:
+                - api_key: []
+              x-amazon-apigateway-request-validator: 'all'
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${SendFunction.Arn}/invocations"
+                httpMethod: POST
+                passthroughBehavior: 'when_no_match'
+                contentHandling: 'CONVERT_TO_TEXT'
+                responses:
+                  "default":
+                    statusCode: "200"
+          /sendforinvoice:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${SendForInvoiceFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+          /sendfororder:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${SendForOrderFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+          /createfororder:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${CreateForOrderFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+          /createforinvoice:
+            post:
+              consumes:
+              - "application/json"
+              produces:
+              - "application/json"
+              parameters:
+              - in: "body"
+                name: "body"
+                required: true
+              responses:
+                '200':
+                  description: "200 response"
+              security:
+                - api_key: []
+              x-amazon-apigateway-integration:
+                type: "aws_proxy"
+                uri: !Sub "arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${CreateForInvoiceFunction.Arn}/invocations"
+                httpMethod: POST
+                responses:
+                  "default":
+                    statusCode: "200"
+  ServerlessApiRoute53RecordSet:
+    Type: "AWS::Route53::RecordSet"
+    Condition: NonDevelopmentResources
+    Properties:
+      AliasTarget:
+        DNSName: !GetAtt "DomainName.DistributionDomainName"
+        HostedZoneId: "Z2FDTNDATAQYW2"
+      HostedZoneId: !ImportValue "dns-coolblue-public-hosted-zone-id"
+      Name: !Sub "${AppGroup}.${Region}.coolblue-${Environment}.eu"
+      Type: "A"
+  UsagePlan:
+    Type: "AWS::ApiGateway::UsagePlan"
+    Properties:
+      ApiStages:
+        -
+          ApiId: !Ref "ServerlessApi"
+          Stage: !Ref "ServerlessApiStage" # this resource is created by CloudFormation transform
+      UsagePlanName: !Ref "AWS::StackName"
+  UsagePlanKey:
+    Type: "AWS::ApiGateway::UsagePlanKey"
+    Properties:
+      KeyId: !Ref "ApiKey"
+      KeyType: "API_KEY"
+      UsagePlanId: !Ref "UsagePlan"
+  

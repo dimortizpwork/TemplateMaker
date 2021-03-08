@@ -1,0 +1,13 @@
+{
+  "Environment": "development",
+  "OracleConnectionString": "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={OracleHostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={OracleUserName};Password = {OraclePassword}",
+  "OracleHostName": "testing-oracle-vanessa-main.chj0idpp42cr.eu-west-1.rds.amazonaws.com",
+  "OracleUserName": "",
+  "OraclePassword": "",
+  "OracleResilience": {
+    "RetryCount": 3,
+    "RetryDelayMilliseconds": 100,
+    "CircuitBreakerAllowedAttempts": 5,
+    "CircuitBreakerDurationMilliseconds": 5000
+  }
+}
