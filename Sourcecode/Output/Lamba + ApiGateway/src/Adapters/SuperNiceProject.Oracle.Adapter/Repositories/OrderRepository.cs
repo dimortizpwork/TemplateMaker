@@ -19,24 +19,28 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
         private const string GetQuery =
            @"select
                 INVITETOPAYID,
-                UNIQUEREFERENCE
-            from table(VAN_PKG_INVITETOPAY.GET(:P_ID))";
+                P_NAME,
+                P_TEST
+            from table(VAN_PKG_INVITETOPAY.GET(:P_ORDERID))";
 
         private const string PostQuery =
              @"begin
                 VAN_PKG_INVITETOPAY.PUT(
-                    :P_UNIQUEREFERENCE,
-                    :P_ID)
+                    :P_NAME,
+                    :P_TEST
+                    :P_ORDERID)
               end;";
         private const string PutQuery =
             @"begin
                 VAN_PKG_INVITETOPAY.PUT(
-                    :P_UNIQUEREFERENCE); 
+                    :P_NAME,
+                                    :P_TEST
+                ); 
               end;";
 
         private const string DeleteQuery =
            @"begin
-                VAN_PKG_INVITETOPAY.DELETE(:P_ID); 
+                VAN_PKG_INVITETOPAY.DELETE(:P_ORDERID); 
               end;";
 
         public OrderRepository(ITimingDbConnectionFactory connectionFactory, OracleResiliencePolicy resiliencePolicy) : base(
@@ -48,7 +52,7 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
         public void Delete(long Id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("P_ID", Id);
+            parameters.Add("P_ORDERID", Id);
 
             ExecuteWithPolicy(() => {
                 return Connection.Execute("DeleteQuery", DeleteQuery, parameters);
@@ -58,7 +62,7 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
         public OrderModel Get(long Id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("P_ID", Id);
+            parameters.Add("P_ORDERID", Id);
 
             return ExecuteWithPolicy(() => {
                 Connection.Open();
@@ -70,20 +74,22 @@ namespace SuperNiceProject.Oracle.Adapter.Repositories
         public int Post(OrderModel model)
         {
             var parameters = new DynamicParameters();
-            //parameters.Add("P_UNIQUEREFERENCE", model.UniqueReference);
-            parameters.Add("P_ID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                parameters.Add("P_NAME", model.Name);
+                parameters.Add("P_TEST", model.Test);
+            parameters.Add("P_ORDERID", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
             return ExecuteWithPolicy(() => {
                 Connection.Execute("PostQuery", PostQuery, parameters);
-                return parameters.Get<int>("P_ID");
+                return parameters.Get<int>("P_ORDERID");
             }, MonitoringPost);
         }
 
         public void Put(long Id, OrderModel model)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("P_ID", Id);
-            //parameters.Add("P_UNIQUEREFERENCE", model.UniqueReference);
+            parameters.Add("P_ORDERID", Id);
+                parameters.Add("P_NAME", model.Name);
+                parameters.Add("P_TEST", model.Test);
 
             ExecuteWithPolicy(() => {
                 return Connection.Execute("PutQuery", PutQuery, parameters);

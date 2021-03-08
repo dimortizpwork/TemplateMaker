@@ -5,12 +5,12 @@ namespace {{SolutionName}}.Host.Lambda.Delete.Presentations
 {
     public class RequestModel: IRequestModel
     {
-        public long {{Model.KeyField}} { get; set; }
+        public long {{Model.KeyField.Name}} { get; set; }
 
         public void Validate()
         {
-            if ({{Model.KeyField}} <= 0)
-                throw new InvalidRequestException("Field {{Model.KeyField}} invalid or not defined");
+            if ({{Model.KeyField.Name}} <= 0)
+                throw new InvalidRequestException("Field {{Model.KeyField.Name}} invalid or not defined");
         }
 
     }

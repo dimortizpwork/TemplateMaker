@@ -38,7 +38,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnNotFound()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{Model.KeyField}}", INVITO_TO_PAYID.ToString() }
+                { "{{Model.KeyField.Name}}", INVITO_TO_PAYID.ToString() }
             });
             var task = _function.FunctionHandler(request, null);
 

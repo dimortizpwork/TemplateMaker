@@ -18,10 +18,61 @@ namespace TemplateMaker.Viewer.Models
         public Property(TemplateParameter templateParameter)
         {
             TemplateParameter = templateParameter;
+            ValidateConfiguration();
+        }
+
+        private void ValidateConfiguration()
+        {
+            if (TemplateParameter.IsParameterObject && TemplateParameter.Value == null)
+                throw new Exception($"Parameter {TemplateParameter.Name} is defined as Object but don't have the parameters setted at the Value field.");
+            if (TemplateParameter.IsCollection && TemplateParameter.IsParameterObject)
+                throw new Exception($"Parameter {TemplateParameter.Name} is defined as Collection and as Object at the same time, this is not allowed.");
 
             //When loading, the Value is an JArray object, so this code will tranform it in a propert IEnumrable<TemplateParameter>
             if (TemplateParameter.IsParameterObject)
                 TemplateParameter.Value = JArrayToTemplateParameterCollection(TemplateParameter);
+            else if (TemplateParameter.IsCollection && TemplateParameter.Value != null)
+                TemplateParameter.Value = JArrayToCollection(TemplateParameter);
+            else if (GetValueType() != typeof(string) && TemplateParameter.Value != null)
+                TemplateParameter.Value = JArrayToCustomType(TemplateParameter);
+
+            ValidateDefaultValue();
+        }
+
+        private void ValidateDefaultValue()
+        {
+            bool valid = true;
+            if (TemplateParameter.Value != null)
+            {
+                if (TemplateParameter.IsParameterObject)
+                {
+                    /*if (TemplateParameter.Value.GetType() != GetValueType())
+                        throw new Exception($"The default Value on parameter {TemplateParameter.Name} it's not a valid {GetValueType()}");*/
+                }
+                else if (TemplateParameter.IsCollection)
+                {
+                    //valid = TemplateParameter.Value.GetType().IsAssignableFrom(GetValueType());
+                }
+                else
+                    valid = TemplateParameter.Value.GetType() == GetValueType();    
+            }
+
+            if(!valid)
+                throw new Exception($"The default Value on parameter {TemplateParameter.Name} it's not a valid {GetValueType()}");
+        }
+
+        private object JArrayToCustomType(TemplateParameter parameter)
+        {
+            if (parameter.Value.GetType().IsAssignableFrom(typeof(JObject)))
+                return JsonConvert.DeserializeObject(parameter.Value.ToString(), GetValueType());
+            return Convert.ChangeType(parameter.Value, GetValueType());
+        }
+
+        private ICollection<object> JArrayToCollection(TemplateParameter parameter)
+        {
+            if (parameter.Value.GetType().IsAssignableFrom(typeof(JArray)))
+                return JsonConvert.DeserializeObject<ICollection<object>>(parameter.Value.ToString());
+            return parameter.Value as ICollection<object>;
         }
 
         private IEnumerable<TemplateParameter> JArrayToTemplateParameterCollection(TemplateParameter parameter)
@@ -70,6 +121,8 @@ namespace TemplateMaker.Viewer.Models
                     return typeof(ICollection<TemplateParameter>);
                 else if (TemplateParameter.Type == ETemplateParameterType.TableInfo)
                     return typeof(ICollection<TableInfoType>);
+                else if (TemplateParameter.Type == ETemplateParameterType.ColumnInfo)
+                    return typeof(ICollection<ColumnInfoType>);
                 else if (TemplateParameter.Type == ETemplateParameterType.ApiInfo)
                     return typeof(ICollection<ApiInfoType>);
             }
@@ -78,9 +131,11 @@ namespace TemplateMaker.Viewer.Models
                 if (TemplateParameter.Type == ETemplateParameterType.String)
                     return typeof(string);
                 else if (TemplateParameter.Type == ETemplateParameterType.Object)
-                    return typeof(TemplateParameter);
+                    return typeof(IEnumerable<TemplateParameter>);
                 else if (TemplateParameter.Type == ETemplateParameterType.TableInfo)
                     return typeof(TableInfoType);
+                else if (TemplateParameter.Type == ETemplateParameterType.ColumnInfo)
+                    return typeof(ColumnInfoType);
                 else if (TemplateParameter.Type == ETemplateParameterType.ApiInfo)
                     return typeof(ApiInfoType);
             }
@@ -92,26 +147,13 @@ namespace TemplateMaker.Viewer.Models
             if (GetValue() != null)
             {
                 if (GetIsCollection())
-                { 
-                    if (TemplateParameter.Type == ETemplateParameterType.String)
-                        return $"[Collection::String][{(GetValue() as ICollection<object>).Count()}]";
-                    else if (TemplateParameter.Type == ETemplateParameterType.Object)
-                        return $"[Collection::Object][{(GetValue() as ICollection<object>).Count()}]";
-                    else if (TemplateParameter.Type == ETemplateParameterType.TableInfo)
-                        return $"[Collection::TableInfo][{(GetValue() as ICollection<object>).Count()}]";
-                    else if (TemplateParameter.Type == ETemplateParameterType.ApiInfo)
-                        return $"[Collection::ApiInfo][{(GetValue() as ICollection<object>).Count()}]";
-                }
+                    return $"[Collection::{TemplateParameter.Type}][{(GetValue() as ICollection<object>).Count()}]";
                 else
                 {
                     if (TemplateParameter.Type == ETemplateParameterType.String)
                         return GetValue() as string;
-                    else if (TemplateParameter.Type == ETemplateParameterType.Object)
-                        return $"[Object::Object]";
-                    else if (TemplateParameter.Type == ETemplateParameterType.TableInfo)
-                        return $"[Object::TableInfo] {(GetValue() as TableInfoType).FullName}";
-                    else if (TemplateParameter.Type == ETemplateParameterType.ApiInfo)
-                        return $"[Object::ApiInfo] {(GetValue() as ApiInfoType).Name}";
+                    else 
+                        return $"[Object::{TemplateParameter.Type}]";
                 }
             }
             return null;
@@ -121,6 +163,8 @@ namespace TemplateMaker.Viewer.Models
         {
             if (TemplateParameter.Type == ETemplateParameterType.TableInfo)
                 return typeof(TableInfoPropertyEditor);
+            else if (TemplateParameter.Type == ETemplateParameterType.ColumnInfo)
+                return typeof(ColumnInfoPropertyEditor);
             else if (TemplateParameter.Type == ETemplateParameterType.ApiInfo)
                 return typeof(ApiInfoPropertyEditor);
             return null;

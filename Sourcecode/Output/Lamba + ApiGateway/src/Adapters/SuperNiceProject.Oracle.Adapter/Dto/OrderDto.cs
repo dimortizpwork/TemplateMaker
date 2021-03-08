@@ -8,14 +8,16 @@ namespace SuperNiceProject.Oracle.Adapter.Dto
 {
     public class OrderDto
     {
-        public long OrderId { get; set; }
-        public string UniqueReference { get; set; }
+        public int OrderId { get; set; }
+        public char Name { get; set; } 
+        public char Test { get; set; } 
 
         public static OrderDto FromModel(OrderModel model)
         {
             return new OrderDto {
                 OrderId = model.OrderId,
-                UniqueReference = model.UniqueReference
+                Name = model.Name,
+                Test = model.Test
             };
         }
 
@@ -23,7 +25,8 @@ namespace SuperNiceProject.Oracle.Adapter.Dto
         {
             return new OrderModel {
                 OrderId = OrderId,
-                UniqueReference = UniqueReference
+                Name = Name,
+                Test = Test
             };
         }
     }

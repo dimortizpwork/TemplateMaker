@@ -10,9 +10,9 @@ namespace {{SolutionName}}.UseCases
         {
             _{{Model.ModelName}}Repository = {{Model.ModelName}}Repository;
         }
-        public void Delete(long {{Model.KeyField}})
+        public void Delete(long {{Model.KeyField.Name}})
         {
-            _{{Model.ModelName}}Repository.Delete({{Model.KeyField}});
+            _{{Model.ModelName}}Repository.Delete({{Model.KeyField.Name}});
         }
     }
 }

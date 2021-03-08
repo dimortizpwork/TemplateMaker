@@ -44,7 +44,7 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnCreated()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{Model.KeyField}}", VALID_ID.ToString() }
+                { "{{Model.KeyField.Name}}", VALID_ID.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
@@ -63,13 +63,13 @@ namespace {{SolutionName}}.Host.Lambda.Tests
             );
 
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string> {
-                { "{{Model.KeyField}}", {{Model.KeyField}}.ToString() }
+                { "{{Model.KeyField.Name}}", {{Model.KeyField.Name}}.ToString() }
             }, _fixure.Create<BodyRequestModel>());
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
-            _useCase.Verify(x => x.Update({{Model.KeyField}}, It.IsAny<{{Model.ModelName}}Model>()), Times.Never);*/
+            _useCase.Verify(x => x.Update({{Model.KeyField.Name}}, It.IsAny<{{Model.ModelName}}Model>()), Times.Never);*/
         }
     }
 }

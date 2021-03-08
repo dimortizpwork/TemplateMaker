@@ -30,7 +30,7 @@ namespace {{SolutionName}}.Host.Lambda.Put
             var _useCase = scope.GetInstance<IUpdate{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Update(requestParameters.{{Model.KeyField}}, requestBody.ToModel());
+                _useCase.Update(requestParameters.{{Model.KeyField.Name}}, requestBody.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }

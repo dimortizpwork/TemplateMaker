@@ -38,13 +38,13 @@ namespace {{SolutionName}}.Host.Lambda.Tests
         public void FunctionHandler_WithValidRequest_WillReturnOK()
         {
             var request = RequestHelper.CreateRequest(HTTPMETHOD, HTTPPATH, new Dictionary<string, string>() {
-                {  "{{Model.KeyField}}", $"{VALID_ID}"}
+                {  "{{Model.KeyField.Name}}", $"{VALID_ID}"}
             });
             var task = _function.FunctionHandler(request, null);
 
             task.Result.Should().NotBeNull();
             task.Result.StatusCode.Should().Be((int)HttpStatusCode.OK);
-            _useCase.Verify(x => x.Delete(VALID_{{Model.KeyField}}), Times.Once);
+            _useCase.Verify(x => x.Delete(VALID_{{Model.KeyField.Name}}), Times.Once);
         }
 
         [Fact]

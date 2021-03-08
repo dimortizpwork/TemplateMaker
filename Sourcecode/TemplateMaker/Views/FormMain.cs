@@ -34,12 +34,19 @@ namespace TemplateMaker.Viewer
 
         private void LoadTemplate(Template template)
         {
-            CurrentTemplate = template;
-            richTextBoxDescription.Text = CurrentTemplate.Description;
-            CurrentProperties = ConvertParameterToProperty(CurrentTemplate.Parameters);
-            smartPropertyGrid.LoadProperties(CurrentProperties);
+            try
+            {
+                CurrentTemplate = template;
+                richTextBoxDescription.Text = CurrentTemplate.Description;
+                CurrentProperties = ConvertParameterToProperty(CurrentTemplate.Parameters);
+                smartPropertyGrid.LoadProperties(CurrentProperties);
 
-            ShowTemplateParameters();
+                ShowTemplateParameters();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"An error ocurred when loading the template `{CurrentTemplate.Name}`: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private List<IProperty> ConvertParameterToProperty(IEnumerable<TemplateParameter> parameters)

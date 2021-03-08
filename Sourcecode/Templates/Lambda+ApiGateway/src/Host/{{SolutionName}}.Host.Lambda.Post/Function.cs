@@ -30,9 +30,9 @@ namespace {{SolutionName}}.Host.Lambda.Post
             var _useCase = scope.GetInstance<ICreate{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                var {{Model.KeyField}} = _useCase.Create(requestParameters.ToModel());
+                var {{Model.KeyField.Name}} = _useCase.Create(requestParameters.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.Created, body: new ResponseModel {
-                    {{Model.KeyField}} = {{Model.KeyField}}
+                    {{Model.KeyField.Name}} = {{Model.KeyField.Name}}
                 });
             });
         }

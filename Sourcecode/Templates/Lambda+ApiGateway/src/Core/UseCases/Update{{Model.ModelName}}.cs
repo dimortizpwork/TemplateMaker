@@ -12,9 +12,9 @@ namespace {{SolutionName}}.UseCases
             _{{Model.ModelName}}Repository = {{Model.ModelName}}Repository;
         }
 
-        public void Update(long {{Model.KeyField}}, {{Model.ModelName}}Model model)
+        public void Update(long {{Model.KeyField.Name}}, {{Model.ModelName}}Model model)
         {
-            _{{Model.ModelName}}Repository.Put({{Model.KeyField}}, model);
+            _{{Model.ModelName}}Repository.Put({{Model.KeyField.Name}}, model);
         }
     }
 }

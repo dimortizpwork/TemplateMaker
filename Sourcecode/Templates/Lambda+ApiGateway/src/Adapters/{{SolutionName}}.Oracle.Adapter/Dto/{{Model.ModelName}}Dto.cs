@@ -8,22 +8,28 @@ namespace {{SolutionName}}.Oracle.Adapter.Dto
 {
     public class {{Model.ModelName}}Dto
     {
-        public long {{Model.KeyField}} { get; set; }
-        public string UniqueReference { get; set; }
+        public {{OracleToCSharp Model.KeyField.Type}} {{Model.KeyField.Name}} { get; set; }
+    {{#each Model.Fields}}
+        public {{OracleToCSharp Type}} {{Name}} { get; set; } 
+    {{/each}}
 
         public static {{Model.ModelName}}Dto FromModel({{Model.ModelName}}Model model)
         {
             return new {{Model.ModelName}}Dto {
-                {{Model.KeyField}} = model.{{Model.KeyField}},
-                UniqueReference = model.UniqueReference
+                {{Model.KeyField.Name}} = model.{{Model.KeyField.Name}},
+            {{#each Model.Fields}}
+                {{Name}} = model.{{Name}}{{#unless @last}},{{/unless}}
+            {{/each}}
             };
         }
 
         public {{Model.ModelName}}Model ToModel()
         {
             return new {{Model.ModelName}}Model {
-                {{Model.KeyField}} = {{Model.KeyField}},
-                UniqueReference = UniqueReference
+                {{Model.KeyField.Name}} = {{Model.KeyField.Name}},
+            {{#each Model.Fields}}
+                {{Name}} = {{Name}}{{#unless @last}},{{/unless}}
+            {{/each}}
             };
         }
     }

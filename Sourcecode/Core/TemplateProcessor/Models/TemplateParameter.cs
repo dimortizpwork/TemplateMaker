@@ -12,6 +12,7 @@ namespace TemplateProcessor.Models
 
         //Schema types
         TableInfo,
+        ColumnInfo,
 
         //Api types
         ApiInfo

@@ -45,23 +45,26 @@
                 "Value": "Order"
             },{
                 "Name": "KeyField",
-                "Type": "String",
+                "Type": "ColumnInfo",
                 "Required": true,
-                "Value": "OrderId"
+                "Value": {
+                    "Name": "OrderId",
+                    "Type": "NUMBER"
+                }
             },{
-                "Name": "SubModel",
-                "Type": "Object",
-                "Required": true,
-                "Value": [{
-                    "Name": "SubModelName",
-                    "Type": "String",
-                    "Required": true,
-                    "Value": "OrderLineId"
-                },{
-                    "Name": "test",
-                    "Type": "TableInfo",
-                    "Required": true
-                }]
+                "Name": "Fields",
+                "Type": "ColumnInfo",
+                "IsCollection": true,
+                "Value": [
+                    {
+                        "Name": "Name",
+                        "Type": "VARCHAR"
+                    },
+                    {
+                        "Name": "Test",
+                        "Type": "VARCHAR"
+                    }
+                ]
             }]
         }
     ]

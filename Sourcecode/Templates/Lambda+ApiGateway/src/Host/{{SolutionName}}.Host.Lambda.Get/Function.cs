@@ -30,7 +30,7 @@ namespace {{SolutionName}}.Host.Lambda.Get
             var _useCase = scope.GetInstance<IGet{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                var {{Model.ModelName}} = _useCase.Get(requestParameters.{{Model.KeyField}});
+                var {{Model.ModelName}} = _useCase.Get(requestParameters.{{Model.KeyField.Name}});
                 if ({{Model.ModelName}} == null)
                     return ApiResponse(statusCode: HttpStatusCode.NotFound, body: null);
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: {{Model.ModelName}});

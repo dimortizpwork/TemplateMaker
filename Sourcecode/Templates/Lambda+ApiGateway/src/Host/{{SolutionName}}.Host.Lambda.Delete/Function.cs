@@ -29,7 +29,7 @@ namespace {{SolutionName}}.Host.Lambda.Delete
             var _useCase = scope.GetInstance<IDelete{{Model.ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _useCase.Delete(requestParameters.{{Model.KeyField}});
+                _useCase.Delete(requestParameters.{{Model.KeyField.Name}});
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }

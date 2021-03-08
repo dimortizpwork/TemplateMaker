@@ -7,12 +7,16 @@ namespace {{SolutionName}}.Host.Lambda.Post.Presentations
 {
     public class RequestModel: IRequestModel
     {
-        public string UniqueReference { get; set; }
+    {{#each Model.Fields}}
+        public {{OracleToCSharp Type}} {{Name}} { get; set; } 
+    {{/each}}
 
         public {{Model.ModelName}}Model ToModel()
         {
             return new {{Model.ModelName}}Model {
-                UniqueReference = UniqueReference
+            {{#each Model.Fields}}
+                {{Name}} = {{Name}}{{#unless @last}},{{/unless}}
+            {{/each}}
             };
         }
 

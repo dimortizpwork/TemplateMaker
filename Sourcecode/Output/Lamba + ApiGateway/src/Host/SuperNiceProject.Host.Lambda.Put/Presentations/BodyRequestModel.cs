@@ -7,12 +7,14 @@ namespace SuperNiceProject.Host.Lambda.Put.Presentations
 {
     public class BodyRequestModel: IRequestModel
     {
-        public string UniqueReference { get; set; }
+        public char Name { get; set; } 
+        public char Test { get; set; } 
 
         public OrderModel ToModel()
         {
             return new OrderModel {
-                UniqueReference = UniqueReference
+                Name = Name,
+                Test = Test
             };
         }
 

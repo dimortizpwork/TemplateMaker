@@ -12,9 +12,9 @@ namespace {{SolutionName}}.UseCases
             _{{Model.ModelName}}Repository = {{Model.ModelName}}Repository;
         }
 
-        public {{Model.ModelName}}Model Get(long {{Model.KeyField}})
+        public {{Model.ModelName}}Model Get(long {{Model.KeyField.Name}})
         {
-            return _{{Model.ModelName}}Repository.Get({{Model.KeyField}});
+            return _{{Model.ModelName}}Repository.Get({{Model.KeyField.Name}});
         }
     }
 }
