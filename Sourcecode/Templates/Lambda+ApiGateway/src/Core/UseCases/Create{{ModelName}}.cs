@@ -12,9 +12,9 @@ namespace {{SolutionName}}.UseCases
             _{{ModelName}}Repository = {{ModelName}}Repository;
         }
 
-        public void Send({{ModelName}}Model model)
+        public int Create({{ModelName}}Model model)
         {
-            _{{ModelName}}Repository.Put(model);
+            return _{{ModelName}}Repository.Post(model);
         }
     }
 }

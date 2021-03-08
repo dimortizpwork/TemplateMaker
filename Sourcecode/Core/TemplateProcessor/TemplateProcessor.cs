@@ -1,5 +1,7 @@
 ﻿using HandlebarsDotNet;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Text;
 using TemplateProcessor.Helpers.SmartString;
@@ -29,9 +31,9 @@ namespace TemplateProcessor
             SmartTypeHelperRegister.Register();
         }
 
-        public void Process(dynamic parameters)
+        public void Process(IEnumerable<TemplateParameter> parameters)
         {
-            ProcessDirectory(Template.SearchDirectory, parameters);
+            ProcessDirectory(Template.SearchDirectory, TemplateParameterProcessor.Process(parameters));
         }
 
         private void ProcessDirectory(string directoryName, dynamic parameters)
@@ -50,12 +52,12 @@ namespace TemplateProcessor
             string processedFileName = templateFileName(parameters);
             processedFileName = processedFileName.Replace("//", "\\");
 
-            if (Template.SearchFileExtensions.IndexOf(Path.GetExtension(filePath)) >= 0){
+            if ((Template.SearchFileExtensions as IList<string>).IndexOf(Path.GetExtension(filePath)) >= 0){
                 string fileContents = File.ReadAllText(filePath);
                 //Process the file contents
-                HandlebarsTemplate<object, object> templateFileContents = Handlebars.Compile(fileContents);
                 try
                 {
+                    HandlebarsTemplate<object, object> templateFileContents = Handlebars.Compile(fileContents);
                     string processedFileContents = templateFileContents(parameters);
                     OnProcessFile?.Invoke(GetTruncateFilePath(processedFileName, Template.SearchDirectory), Encoding.ASCII.GetBytes(processedFileContents));
                 }

@@ -42,7 +42,7 @@ namespace {{SolutionName}}.Oracle.Adapter
 
         private void RegisterRepositories(Container container)
         {
-            container.Register<I{{SolutionName}}Repository, InviteToPayRepository>();
+            container.Register<I{{ModelName}}Repository, {{ModelName}}Repository>();
         }
         private void RegisterResilience(Container container)
         {

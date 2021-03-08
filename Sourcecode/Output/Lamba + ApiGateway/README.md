@@ -1,2 +1,2 @@
-# net-invite-to-kill
-Service that send invitations for kill people :)
+# net-super-nice-roject
+It's just a super nice project

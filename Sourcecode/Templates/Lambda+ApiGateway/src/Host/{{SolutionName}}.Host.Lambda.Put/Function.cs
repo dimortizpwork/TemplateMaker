@@ -2,16 +2,16 @@ using System.Net;
 using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using InviteToPay.Host.Lambda.Put.Presentations;
-using InviteToPay.UseCases;
-using InviteToPay.UseCases.Interfaces;
+using {{SolutionName}}.Host.Lambda.Put.Presentations;
+using {{SolutionName}}.UseCases;
+using {{SolutionName}}.UseCases.Interfaces;
 using Lambda.Base;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace InviteToPay.Host.Lambda.Put
+namespace {{SolutionName}}.Host.Lambda.Put
 {
     public class Function : FunctionFromPathAndBody<PathRequestModel, BodyRequestModel>
     {
@@ -27,17 +27,17 @@ namespace InviteToPay.Host.Lambda.Put
         protected override async Task<APIGatewayProxyResponse> ProcessMessageAsync(PathRequestModel requestParameters, BodyRequestModel requestBody)
         {
             using var scope = AsyncScopedLifestyle.BeginScope(_container);
-            var _updateInviteToPay = scope.GetInstance<IUpdateInviteToPay>();
+            var _useCase = scope.GetInstance<IUpdate{{ModelName}}>();
 
             return await Task<APIGatewayProxyResponse>.Factory.StartNew(() => {
-                _updateInviteToPay.Update(requestParameters.InviteToPayId, requestBody.ToModel());
+                _useCase.Update(requestParameters.{{ModelName}}Id, requestBody.ToModel());
                 return ApiResponse(statusCode: HttpStatusCode.OK, body: null);
             });
         }
 
         public override void RegisterContainer(Container container)
         {
-            container.Register<IUpdateInviteToPay, UpdateInviteToPay>();
+            container.Register<IUpdate{{ModelName}}, Update{{ModelName}}>();
         }
     }
 }

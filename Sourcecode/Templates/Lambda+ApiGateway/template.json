@@ -3,42 +3,58 @@
     "Description": "Create a lambda with apigateaway endpoints",
     "SearchDirectory": null,
     "SearchFileExtensions": [".sql", ".txt", ".cake", ".csproj", ".sln", ".cs", ".md", ".yaml"],
-    "Properties": [
+    "Parameters": [
         {
             "Name": "SolutionName",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "SuperNiceProject"
+            "Value": "SuperNiceProject"
         },
         {
             "Name": "ApiOracleUser",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "SRV_SUPER_NICE"
+            "Value": "SRV_SUPER_NICE"
         },
         {
             "Name": "GitHubRepositoryName",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "net-super-nice-roject"
+            "Value": "net-super-nice-project"
         },
         {
             "Name": "ProjectDescription",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "It's just a super nice project"
+            "Value": "It's just a super nice project"
         },
         {
             "Name": "CostCenter",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "mybrain"
+            "Value": "mybrain"
         },
         {
             "Name": "ModelName",
             "Type": "String",
             "Required": true,
-            "DefaultValue": "NiceProject"
+            "Value": "NiceProject"
+        },
+        {
+            "Name": "Model",
+            "Type": "Object",
+            "Required": true,
+            "Parameters":  [{
+                "Name": "ModelName",
+                "Type": "String",
+                "Required": true,
+                "Value": "Order"
+            },{
+                "Name": "PrimaryKey",
+                "Type": "String",
+                "Required": true,
+                "Value": "OrderId"
+            }]
         }
     ]
 }
