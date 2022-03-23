@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InviteToPay.Oracle.Adapter.Helpers
+namespace {{SolutionName}}.Oracle.Adapter.Helpers
 {
     internal static class OracleHelper
     {

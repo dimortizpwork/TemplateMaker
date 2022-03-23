@@ -1,9 +1,5 @@
 [
   {
-    "ParameterKey": "Environment",
-    "ParameterValue": "production"
-  },
-  {
     "ParameterKey": "OracleConnectionString",
     "ParameterValue": "Data Source =(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST={OracleHostName})(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=ORCL_A)));User Id={OracleUserName};Password = {OraclePassword}"
   },
@@ -17,6 +13,6 @@
   },
   {
     "ParameterKey": "OraclePassword",
-    "ParameterValue": "AQICAHja4UwE1LSU3jDLKCq9tUZ76qcXgwP5to5vqZNRcaCWAgGrtXWcB/Go4mXruE9/3PhTAAAAbjBsBgkqhkiG9w0BBwagXzBdAgEAMFgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMBRPjNgMBoTGFumVlAgEQgCsC0NPlK5D40xsi6T4jab8ymLvROHc2PSCyWfNcYvUZ5AsuAhb2WqAsseUg"
+    "ParameterValue": "Encrypt using https://teamcity.coolblue.eu/buildConfiguration/Aws_Iam_Kms_Userdata_EuWest1_Production"
   }
 ]

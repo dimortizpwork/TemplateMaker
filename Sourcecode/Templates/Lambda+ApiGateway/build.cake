@@ -25,10 +25,11 @@ var sourceDir = Directory("./src");
 var solutions = GetFiles("./**/*.sln");
 var projects = new []
 {
-    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Host.Lambda.Delete/{{SolutionName}}.Host.Lambda.Delete.csproj"),
-    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Host.Lambda.Get/{{SolutionName}}.Host.Lambda.Get.csproj"),
-    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Host.Lambda.Post/{{SolutionName}}.Host.Lambda.Post.csproj"),
-    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Host.Lambda.Put/{{SolutionName}}.Host.Lambda.Put.csproj"),
+    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Lambda.Delete/{{SolutionName}}.Lambda.Delete.csproj"),
+    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Lambda.Get/{{SolutionName}}.Lambda.Get.csproj"),
+    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Lambda.GetAll/{{SolutionName}}.Lambda.GetAll.csproj"),
+    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Lambda.Post/{{SolutionName}}.Lambda.Post.csproj"),
+    new FilePath(sourceDir.Path + "/Host/{{SolutionName}}.Lambda.Put/{{SolutionName}}.Lambda.Put.csproj"),
 };
 
 const string functionName = "GetFunction";

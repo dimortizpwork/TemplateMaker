@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using System.Data.Common;
 using System.IO;
 using Coolblue.Utilities.Data.Timing;
@@ -42,7 +41,7 @@ namespace {{SolutionName}}.Oracle.Adapter
 
         private void RegisterRepositories(Container container)
         {
-            container.Register<I{{SolutionName}}Repository, InviteToPayRepository>();
+            container.Register<I{{Model.ModelName}}Repository, {{Model.ModelName}}Repository>();
         }
         private void RegisterResilience(Container container)
         {
