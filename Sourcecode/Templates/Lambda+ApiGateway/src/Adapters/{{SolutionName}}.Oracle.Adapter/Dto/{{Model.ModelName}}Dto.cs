@@ -1,14 +1,10 @@
-using {{SolutionName}}.Oracle.Adapter.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using {{SolutionName}}.Models;
 
 namespace {{SolutionName}}.Oracle.Adapter.Dto
 {
     public class {{Model.ModelName}}Dto
     {
-        public {{OracleToCSharp Model.KeyField.Type}} {{Model.KeyField.Name}} { get; set; }
+        public long {{Model.KeyField.Name}} { get; set; }
     {{#each Model.Fields}}
         public {{OracleToCSharp Type}} {{Name}} { get; set; } 
     {{/each}}

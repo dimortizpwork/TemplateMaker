@@ -1,5 +1,5 @@
 ﻿
-namespace TemplateMaker.Views.PropertyEditors
+namespace TemplateMaker.Viewer.Views.PropertyEditors
 {
     partial class ApiInfoPropertyEditor
     {

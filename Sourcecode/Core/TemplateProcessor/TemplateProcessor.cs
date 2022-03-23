@@ -1,7 +1,6 @@
 ﻿using HandlebarsDotNet;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Text;
 using TemplateProcessor.Helpers.SmartString;

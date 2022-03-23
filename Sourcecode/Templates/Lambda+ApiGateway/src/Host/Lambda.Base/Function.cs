@@ -32,9 +32,9 @@ namespace Lambda.Base
         {
         }
 
-        public BaseFunction(Container container, bool IsUnitTest = false)
+        public BaseFunction(Container container, bool isUnitTest = false)
         {
-            if (!IsUnitTest)
+            if (!isUnitTest)
             {
                 RegisterContainer(container);
             }
@@ -106,10 +106,47 @@ namespace Lambda.Base
             }
         }
     }
+    
+    public abstract class FunctionFromPath : BaseFunction
+    {
+        public FunctionFromPath(Container container, bool isUnitTest = false) : base(container, isUnitTest)
+        {
+            //Constructor used for tests with custom container
+        }
+        public FunctionFromPath() : base()
+        {
+
+        }
+
+        public virtual async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
+        {
+            try
+            {
+                _monitoringEvents.Logger.Information("Processed message {request}", request);
+                var correlationId = GetCorrelationId();
+                using (_monitoringEvents.LogContext.PushProperty(new LogContextProperty("CorrelationId", correlationId.ToString())))
+                {
+                    return await ProcessMessageAsync();
+                }
+            }
+            catch (InvalidRequestException ex)
+            {
+                _monitoringEvents.Logger.Information("Invalid request {request}", request);
+                return ApiResponse(statusCode: HttpStatusCode.BadRequest, message: ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _monitoringEvents.Logger.Information("An error ocurred for the request {request}", request);
+                return ApiResponse(statusCode: HttpStatusCode.InternalServerError, message: ex.Message);
+            }
+        }
+
+        protected abstract Task<APIGatewayProxyResponse> ProcessMessageAsync();
+    }
 
     public abstract class FunctionFromPath<TFromPath>: BaseFunction where TFromPath : IRequestModel
     {
-        public FunctionFromPath(Container container, bool IsUnitTest = false) : base(container, IsUnitTest)
+        public FunctionFromPath(Container container, bool isUnitTest = false) : base(container, isUnitTest)
         {
             //Constructor used for tests with custom container
         }
@@ -149,7 +186,7 @@ namespace Lambda.Base
     public abstract class FunctionFromPathAndBody<TFromPath, TFromBody>: BaseFunction, ILambdaFunction where TFromPath : IRequestModel
                                                                        where TFromBody : IRequestModel
     {
-        public FunctionFromPathAndBody(Container container, bool IsUnitTest = false) : base(container, IsUnitTest)
+        public FunctionFromPathAndBody(Container container, bool isUnitTest = false) : base(container, isUnitTest)
         {
             //Constructor used for tests with custom container
         }
@@ -189,7 +226,7 @@ namespace Lambda.Base
 
     public abstract class FunctionFromBody<TFromBody> : BaseFunction, ILambdaFunction where TFromBody : IRequestModel
     {
-        public FunctionFromBody(Container container, bool IsUnitTest = false) : base(container, IsUnitTest)
+        public FunctionFromBody(Container container, bool isUnitTest = false) : base(container, isUnitTest)
         {
             //Constructor used for tests with custom container
         }

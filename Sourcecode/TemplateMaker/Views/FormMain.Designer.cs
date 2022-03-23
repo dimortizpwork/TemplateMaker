@@ -1,5 +1,5 @@
 ﻿
-namespace TemplateMaker.Viewer
+namespace TemplateMaker.Viewer.Views
 {
     partial class FormMain
     {

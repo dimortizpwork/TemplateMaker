@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TemplateMaker.Viewer.Types;
-using TemplateMaker.Views.PropertyEditors;
+using TemplateMaker.Viewer.Views.PropertyEditors;
 using TemplateProcessor;
 using TemplateProcessor.Models;
 

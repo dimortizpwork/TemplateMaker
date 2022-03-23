@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TemplateMaker.Viewer.Views;
 using TemplateProcessor.Helpers.SmartString;
 using TemplateProcessor.Helpers.SmartType;
 

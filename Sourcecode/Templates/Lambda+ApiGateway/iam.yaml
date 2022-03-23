@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "IAM resources for {{AppGroupName}}"
+Metadata:
+  AlertIdentifier: "{{CostCenter}}"
+  Tags:
+    CostCenter: "{{CostCenter}}"
+Parameters:
+  AppGroup:
+    Type: "String"
+    Default: "{{AppGroupName}}"
+    AllowedPattern: "^[a-z0-9\\\\-]{1,21}$"
+  Environment:
+    Type: "AWS::SSM::Parameter::Value<String>"
+    Default: "/global/environment"
+    Description: "Environment in which resources are deployed."
+Resources:
+  RoleApiToLambda:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: !Ref "AppGroup"
+      PermissionsBoundary: !ImportValue "iam-boundary-application-deployment-permission-boundary"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+        - !ImportValue "default-lambda-managed-policy-arn"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${Environment}-${AppGroup}-role"
+        - Key: "AppGroup"
+          Value: !Ref "AppGroup"
+        - Key: "Environment"
+          Value: !Ref "Environment"
+Outputs:
+  RoleApiToLambda:
+    Description: "The role ARN that should be used by api in order to access the lambda "
+    Value: !GetAtt "RoleApiToLambda.Arn"
+    Export:
+      Name: !Sub "${AppGroup}-iam-api-to-lambda"

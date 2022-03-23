@@ -2,70 +2,105 @@
     "Name": "Lamba + ApiGateway",
     "Description": "Create a lambda with apigateaway endpoints",
     "SearchDirectory": null,
-    "SearchFileExtensions": [".sql", ".txt", ".cake", ".csproj", ".sln", ".cs", ".md", ".yaml"],
+    "SearchFileExtensions": [".sql", ".txt", ".cake", ".csproj", ".sln", ".cs", ".md", ".yaml", ".json"],
     "Parameters": [
         {
             "Name": "SolutionName",
             "Type": "String",
             "Required": true,
-            "Value": "SuperNiceProject"
+            "Value": "ClosedCommunity"
+        },
+        {
+            "Name": "PackageName",
+            "Type": "String",
+            "Required": true,
+            "Value": "API_PKG_CLOSEDCOMMUNITY"
         },
         {
             "Name": "ApiOracleUser",
             "Type": "String",
             "Required": true,
-            "Value": "SRV_SUPER_NICE"
+            "Value": "SRV_CLOSEDCOMMUNITY"
         },
         {
             "Name": "GitHubRepositoryName",
             "Type": "String",
             "Required": true,
-            "Value": "net-super-nice-project"
+            "Value": "net-closed-community"
+        },
+        {
+            "Name": "AppGroupName",
+            "Type": "String",
+            "Required": true,
+            "Value": "closed-community"
         },
         {
             "Name": "ProjectDescription",
             "Type": "String",
             "Required": true,
-            "Value": "It's just a super nice project"
+            "Value": "Api to handle closed community sync to oracle."
         },
         {
             "Name": "CostCenter",
             "Type": "String",
             "Required": true,
-            "Value": "mybrain"
+            "Value": "finance"
+        },
+        {
+            "Name": "MainEndpointName",
+            "Type": "String",
+            "Required": true,
+            "Value": ""
         },
         {
             "Name": "Model",
             "Type": "Object",
             "Required": true,
-            "Value":  [{
-                "Name": "ModelName",
-                "Type": "String",
-                "Required": true,
-                "Value": "Order"
-            },{
-                "Name": "KeyField",
-                "Type": "ColumnInfo",
-                "Required": true,
-                "Value": {
-                    "Name": "OrderId",
-                    "Type": "NUMBER"
-                }
-            },{
-                "Name": "Fields",
-                "Type": "ColumnInfo",
-                "IsCollection": true,
-                "Value": [
-                    {
-                        "Name": "Name",
-                        "Type": "VARCHAR"
-                    },
-                    {
-                        "Name": "Test",
-                        "Type": "VARCHAR"
-                    }
-                ]
-            }]
+            "Value":  
+			[
+				{
+					"Name": "ModelName",
+					"Type": "String",
+					"Required": true,
+					"Value": "ClosedCommunity"
+				},
+				{
+					"Name": "KeyField",
+					"Type": "ColumnInfo",
+					"Required": true,
+					"Value": {
+						"Name": "CreditRequestId",
+						"Type": "NUMBER"
+					}
+				},
+				{
+					"Name": "Fields",
+					"Type": "ColumnInfo",
+					"IsCollection": true,
+					"Value": [
+                        {
+                          "Name": "Name",
+                          "Type": "VARCHAR"
+                        },
+                        {
+                          "Name": "CompanyCustomerId",
+                          "Type": "NUMBER"
+                        },
+                        {
+                          "Name": "FixedAddress",
+                          "Type": "CHAR"
+                        },
+                        {
+                          "Name": "CreationDateTime",
+                          "Type": "DATETIME"
+                        },
+                        {
+                          "Name": "LastModificationDateTime",
+                          "Type": "DATETIME"
+                        }
+					]
+				}
+			]
         }
     ]
 }

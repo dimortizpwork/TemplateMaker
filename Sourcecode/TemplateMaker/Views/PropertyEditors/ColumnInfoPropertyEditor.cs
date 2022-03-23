@@ -1,13 +1,8 @@
-﻿using SchemaProcessor;
-using SchemaProcessor.SchemaProviders;
-using System;
-using System.Windows.Forms;
-using TemplateMaker.Viewer.Helpers.SchemaProvider;
-using TemplateMaker.Viewer.Helpers.SchemaProvider.Exceptions;
-using TemplateMaker.Viewer.Types;
+﻿using System.Windows.Forms;
 using SmartProperty.Editors;
+using TemplateMaker.Viewer.Types;
 
-namespace TemplateMaker.Views.PropertyEditors
+namespace TemplateMaker.Viewer.Views.PropertyEditors
 {
     public partial class ColumnInfoPropertyEditor : UserControl, ISmartPropertyEditor
     {

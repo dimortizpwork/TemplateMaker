@@ -1,16 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using TemplateProcessor.Models;
+using Newtonsoft.Json;
+using SmartProperty;
 using TemplateMaker.Viewer.Models;
 using TemplateProcessor;
-using TemplateMaker.Viewer.Views;
-using TemplateProcessor.Helpers.SmartString.Exceptions;
-using SmartProperty;
+using TemplateProcessor.Models;
 
-namespace TemplateMaker.Viewer
+namespace TemplateMaker.Viewer.Views
 {
     public partial class FormMain : Form
     {
@@ -25,7 +24,7 @@ namespace TemplateMaker.Viewer
 
         private void LoadTemplates()
         {
-            TemplateManager.Load(@"C:\Dev\DotNet\#Mine\TemplateMaker\Sourcecode\Templates");
+            TemplateManager.Load(@"C:\Dev\Templates\TemplateMaker\Sourcecode\Templates");
             foreach (Template template in TemplateManager.GetTemplates())
                 comboBoxTemplate.Items.Add(template);
             if(comboBoxTemplate.Items.Count > 0)
@@ -45,16 +44,21 @@ namespace TemplateMaker.Viewer
             }
             catch (Exception e)
             {
-                MessageBox.Show($"An error ocurred when loading the template `{CurrentTemplate.Name}`: {e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    $@"An error occurred when loading the template `{CurrentTemplate.Name}`: {e.Message}", 
+                    @"Error", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                    );
             }
         }
 
         private List<IProperty> ConvertParameterToProperty(IEnumerable<TemplateParameter> parameters)
         {
-            List<IProperty> properties = new List<IProperty>();
-            foreach (TemplateParameter parameter in parameters)
-                properties.Add(new Property(parameter));
-            return properties;
+            return parameters
+                .Select(parameter => new Property(parameter))
+                .Cast<IProperty>()
+                .ToList();
         }
 
         private void ShowTemplateParameters()
@@ -62,15 +66,6 @@ namespace TemplateMaker.Viewer
             dynamic templateParameters = TemplateParameterProcessor.Process(CurrentTemplate.Parameters);
             richTextBoxParametersJson.Text = JsonConvert.SerializeObject(templateParameters, Formatting.Indented);
         }
-
-        /*private void ThreatInvalidDictionaryEntryException(MissingDictonaryEntryException ex)
-        {
-            FormDictionaryEntryEditor formDictionaryEntryEditor = new FormDictionaryEntryEditor(ex.Word);
-            formDictionaryEntryEditor.ShowDialog();
-            if (formDictionaryEntryEditor.Continue)
-                ShowTemplateParameters();
-        }*/
-
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
@@ -99,7 +94,12 @@ namespace TemplateMaker.Viewer
             };
             processor.OnProcessFileError += (string file, Exception exception) =>
             {
-                MessageBox.Show($"An error ocurred when processing the template at file `{file}`: {exception.Message}", "Atention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    $@"An error occurred when processing the template at file `{file}`: {exception.Message}", 
+                    @"Attention", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                    );
             };
             processor.Process(CurrentTemplate.Parameters);
         }

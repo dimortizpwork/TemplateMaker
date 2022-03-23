@@ -1,15 +1,15 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "CloudFront certificate for the {{GitHubRepositoryName}}"
+Description: "CloudFront certificate for the {{AppGroupName}}"
 Metadata:
-  AlertIdentifier: "{{GitHubRepositoryName}}"
+  AlertIdentifier: "{{AppGroupName}}"
   Tags:
     CostCenter: "{{CostCenter}}"
 Parameters:
   AppGroup:
     Type: "String"
-    Default: "{{GitHubRepositoryName}}"
+    Default: "{{AppGroupName}}"
     Description: "The name of the AppGroup"
-    AllowedPattern: "^[a-z0-9\\-]{1,32}$"
+    AllowedPattern: "^[a-z0-9\\\\-]{1,32}$"
   Environment:
     Type: "AWS::SSM::Parameter::Value<String>"
     Default: "/global/environment"
